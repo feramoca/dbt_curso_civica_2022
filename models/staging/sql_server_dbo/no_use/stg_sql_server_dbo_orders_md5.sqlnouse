@@ -1,0 +1,31 @@
+{{
+  config(
+    materialized='view'
+  )
+}}
+
+WITH src_orders AS (
+    SELECT * 
+    FROM {{ source('sql_server_dbo', 'orders') }}
+    ),
+
+orders_md5 AS (
+    SELECT
+          order_id as id_order
+        , md5 (promo_id) as id_promo
+        , order_cost as pedido_coste
+        , cast (created_at as date) as pedido_fecha_creado
+        , tracking_id as id_tracking
+        , address_id as id_address
+        , cast (delivered_at as date) as pedido_fecha_envio
+        , status as pedido_estado
+        , shipping_cost as pedido_coste_envio
+        , user_id as id_user
+        , shipping_service as agencia_envio
+        , order_total as pedido_total
+        , cast (estimated_delivery_at as date) as pedido_fecha_envio_estimada
+        
+    FROM src_orders
+    )
+
+SELECT * FROM orders_md5
