@@ -11,9 +11,9 @@ WITH src_orders AS (
 
 orders AS (
     SELECT
-          order_id as id_order
-        , md5 (replace ( promo_id, ' ', '')) as id_promo
-        , id_promo as promo
+          order_id
+        , md5 (replace ( promo_id, ' ', '')) as promo_id
+        , promo_id as promo
         , order_cost
         , cast (created_at as date) as created_at
         , tracking_id

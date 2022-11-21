@@ -15,7 +15,14 @@ products AS (
         , name
         , inventory
         , price
-        
+        , case 
+            when inventory > 75 then 'High'
+            when inventory > 50 then 'Optimus'
+            else 'Low'
+            end as Stock
+
+
+
     FROM src_products
     )
 

@@ -13,7 +13,10 @@ events AS (
     SELECT
           event_id
         , cast (created_at as date) as created_at
-        , product_id
+        , case 
+            when product_id = '' then null
+            else product_id
+            end as product_id
         , session_id
         , page_url
         , order_id
