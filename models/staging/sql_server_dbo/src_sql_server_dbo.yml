@@ -4,7 +4,12 @@ sources:
   - name: sql_server_dbo
     description: "Datos extraidos desde SQL Server"  
     schema: sql_server_dbo # this is the schema our raw data lives in
-    database: dev_bronze_db_alumno11
+    database: |  
+        {%- if  target.name == 'user_dev' -%} dev_bronze_db_alumno11 
+        {%- elif target.name == 'ci' -%} dev_bronze_db_alumno11 
+        {%- elif target.name == 'pro'-%} pro_bronze_db_alumno11  
+        {%- else -%} {{target.database}}_bronze_db_alumno11
+        {%- endif -%}
 
     quoting:
       database: false
