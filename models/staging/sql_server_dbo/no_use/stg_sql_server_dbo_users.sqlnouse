@@ -1,0 +1,27 @@
+{{
+  config(
+    materialized='view'
+  )
+}}
+
+WITH src_users AS (
+    SELECT * 
+    FROM {{ source('sql_server_dbo', 'users') }}
+    ),
+
+users_renamed AS (
+    SELECT
+          user_id as id_user
+        , phone_number as Cliente_Telefono
+        , first_name as Cliente_Nombre
+        , last_name as Cliente_Apellido
+        , cast (created_at as date) as Cliente_Fecha_Creacion
+        , address_id as id_address
+        , cast (updated_at as date) as Cliente_Fecha_Update
+        , email
+        
+        
+    FROM src_users
+    )
+
+SELECT * FROM users_renamed

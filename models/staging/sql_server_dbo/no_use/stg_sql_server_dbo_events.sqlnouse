@@ -1,0 +1,26 @@
+{{
+  config(
+    materialized='view'
+  )
+}}
+
+WITH src_events AS (
+    SELECT * 
+    FROM {{ source('sql_server_dbo', 'events') }}
+    ),
+
+events_renamed AS (
+    SELECT
+          event_id as id_event
+        , cast (created_at as date) as evento_fecha
+        , product_id as id_product
+        , session_id as id_session
+        , page_url
+        , order_id as id_order
+        , event_type as Evento_tipo
+        , user_id as id_user
+        
+    FROM src_events
+    )
+
+SELECT * FROM events_renamed 

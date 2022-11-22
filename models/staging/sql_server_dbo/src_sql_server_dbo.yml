@@ -1,0 +1,258 @@
+version: 2
+
+sources:
+  - name: sql_server_dbo
+    description: "Datos extraidos desde SQL Server"  
+    schema: sql_server_dbo # this is the schema our raw data lives in
+    database: |  
+        {%- if  target.name == 'user_dev' -%} dev_bronze_db_alumno11 
+        {%- elif target.name == 'ci' -%} dev_bronze_db_alumno11 
+        {%- elif target.name == 'pro'-%} pro_bronze_db_alumno11  
+        {%- else -%} {{target.database}}_bronze_db_alumno11
+        {%- endif -%}
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+
+#sources:
+  #- name: sql_server_dbo
+   # description: "Datos extraidos desde SQL Server. Son estáticos"
+    #database: dev_bronze_db_alumno11
+    tables:
+      - name: addresses
+        description: "Tabla de direcciones. Tanto clientes como pedidos"
+        columns:
+          - name: address_id
+            description: ""
+            tests:
+              - not_null
+              - unique
+          - name: country
+            description: ""
+            tests:
+              - not_null            
+          - name: zipcode
+            description: ""
+            tests:
+              - not_null            
+          - name: address
+            description: ""
+            tests:
+              - not_null            
+          - name: state
+            description: ""
+            tests:
+              - not_null            
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: events
+        description: "Eventos transcurridos en el WEB"
+        columns:
+          - name: event_id
+            description: ""
+            tests:
+              - not_null
+              - unique            
+          - name: created_at
+            description: ""
+          - name: product_id
+            description: ""
+            tests:
+              - not_null
+              - relationships:
+                  to: source('sql_server_dbo','products')
+                  field: product_id            
+          - name: session_id
+            description: ""
+          - name: page_url
+            description: ""
+          - name: order_id
+            description: ""
+            tests:
+              - not_null
+              - relationships:
+                  to: source('sql_server_dbo','orders')
+                  field: order_id            
+          - name: event_type
+            description: ""
+          - name: user_id
+            description: ""
+            tests:
+              - not_null
+              - relationships:
+                  to: source('sql_server_dbo','users')
+                  field: user_id
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: order_items
+        description: "Artículos del pedido"
+        columns:
+          - name: order_id       
+            description: ""
+            tests:
+              - not_null
+              - relationships:
+                  to: source('sql_server_dbo','orders')
+                  field: order_id        
+          - name: product_id
+            description: ""
+            tests:
+              - not_null
+              - relationships:
+                  to: source('sql_server_dbo','products')
+                  field: product_id            
+          - name: quantity
+            description: ""
+            tests:
+              - not_null
+              #- positive_values			             
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: orders
+        description: "Pedidos"
+        columns:
+          - name: order_id
+            description: ""
+            tests:
+              - unique
+              - not_null
+          - name: promo_id
+            description: ""
+            tests:
+              - relationships:
+                  to: source('sql_server_dbo','promos')
+                  field: promo_id            
+          - name: order_cost
+            description: ""
+            tests:
+              - not_null
+              #- positive_values			            
+          - name: created_at
+            description: ""
+          - name: tracking_id
+            description: ""
+          - name: address_id
+            description: ""
+            tests:
+              - not_null
+              - relationships:
+                  to: source('sql_server_dbo','addresses')
+                  field: address_id            
+          - name: delivered_at
+            description: ""
+          - name: status
+            description: ""
+          - name: shipping_cost
+            description: ""
+          - name: user_id
+            description: ""
+            tests:
+              - not_null
+              - relationships:
+                  to: source('sql_server_dbo','users')
+                  field: user_id            
+          - name: shipping_service
+            description: ""
+          - name: order_total
+            description: ""
+            tests:
+              - not_null
+              #- positive_values			              
+          - name: estimated_delivery_at
+            description: ""
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: products
+        description: "Productos"
+        columns:
+          - name: product_id
+            description: ""
+            tests:
+              - unique
+              - not_null            
+          - name: name
+            description: ""
+          - name: inventory
+            description: ""
+          - name: price
+            description: ""
+            tests:
+              - not_null
+              #- positive_values			              
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: promos
+        description: "Promo aplicada al pedido"
+        columns:
+          - name: promo_id
+            description: ""
+            tests:
+              - unique
+              - not_null           
+          - name: discount
+            description: ""
+          - name: status
+            description: ""
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: users
+        description: "Clientes"
+        columns:
+          - name: user_id
+            description: ""
+            tests:
+              - unique
+              - not_null          
+          - name: phone_number
+            description: ""
+          - name: total_orders
+            description: ""
+          - name: first_name
+            description: ""
+            tests:
+              - not_null           
+          - name: last_name
+            description: ""
+            tests:
+              - not_null            
+          - name: created_at
+            description: ""
+          - name: address_id
+            description: ""
+            tests:
+              - not_null 
+              - relationships:
+                  to: source('sql_server_dbo','addresses')
+                  field: address_id            
+          - name: updated_at
+            description: ""
+          - name: email
+            description: ""
+            tests:
+              - unique
+              - not_null           
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""

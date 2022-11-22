@@ -1,0 +1,38 @@
+version: 2
+
+sources:
+  - name: google_sheets
+    description: "Datos extraidos desde Google Sheets"
+    schema: google_sheets # this is the schema our raw data lives in
+    database: |  
+        {%- if  target.name == 'user_dev' -%} dev_bronze_db_alumno11 
+        {%- elif target.name == 'ci' -%} dev_bronze_db_alumno11 
+        {%- elif target.name == 'pro'-%} pro_bronze_db_alumno11  
+        {%- else -%} {{target.database}}_bronze_db_alumno11
+        {%- endif -%}
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+
+    tables:
+      - name: budget_fro
+        description: "Tabla de presupuestos"
+        columns:
+          - name: _row
+            description: ""
+          - name: quantity
+            description: ""
+          - name: month
+            description: ""
+          - name: product_id
+            tests:
+              - not_null
+              - relationships:
+                  to: source('sql_server_dbo','products')
+                  field: product_id          
+            description: ""
+          - name: _fivetran_synced
+            description: ""

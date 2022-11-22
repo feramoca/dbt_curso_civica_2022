@@ -1,0 +1,21 @@
+{{
+  config(
+    materialized='view'
+  )
+}}
+
+WITH src_order_items AS (
+    SELECT * 
+    FROM {{ source('sql_server_dbo', 'order_items') }}
+    ),
+
+order_items_renamed AS (
+    SELECT
+          order_id as id_order
+        , product_id as id_product
+        , quantity as cantidad
+        
+    FROM src_order_items
+    )
+
+SELECT * FROM order_items_renamed

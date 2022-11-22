@@ -1,0 +1,22 @@
+{{
+  config(
+    materialized='view'
+  )
+}}
+
+WITH src_promos AS (
+    SELECT * 
+    FROM {{ source('sql_server_dbo', 'promos') }}
+    ),
+
+promos_md5 AS (
+    SELECT
+          md5 (promo_id) as id_promo
+        , promo_id as promo_nombre
+        , discount as promo_descuento
+        , status as promo_estado
+        
+    FROM src_promos
+    )
+
+SELECT * FROM promos_md5
