@@ -15,9 +15,9 @@ users AS (
         , phone_number
         , first_name
         , last_name
-        , cast (created_at as date) as created_at
+        , cast (created_at as datetime) as created_at
         , address_id
-        , cast (updated_at as date) as updated_at
+        , cast (updated_at as datetime) as updated_at
         , email
         
         

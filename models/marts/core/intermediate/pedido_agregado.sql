@@ -17,10 +17,10 @@ Pedidos_agregados AS (
         , sum (quantity) as Total_Unidades_Pedido
         , pedidos.order_total
         , ((order_total) / (sum (quantity))) as Importe_Medio_Articulo
-        , DATEDIFF(day, created_at, estimated_delivery_at) AS Dias_en_Enviar
+        , DATEDIFF(day, created_at, delivered_at) AS Dias_en_Entregar
     FROM pedidos
     join lineas on lineas.order_id = pedidos.order_id
-    group by pedidos.order_id, pedidos.order_total, Dias_en_Enviar
+    group by pedidos.order_id, pedidos.order_total, Dias_en_Entregar
     order by pedidos.order_id asc
     
     )

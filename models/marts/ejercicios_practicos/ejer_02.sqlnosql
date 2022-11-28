@@ -1,0 +1,12 @@
+WITH src_pedidos AS (
+    SELECT * 
+    FROM {{ ref('fct_orders') }}
+    ),
+
+tiempo_medio AS (
+    SELECT
+        avg (Dias_en_Entregar) as media_envio
+    FROM src_pedidos
+    )
+
+SELECT * FROM tiempo_medio

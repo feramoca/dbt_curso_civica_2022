@@ -17,6 +17,7 @@ fct_produts AS (
         , stg_lineas_pedido.product_id
         , quantity
         , price
+        , (quantity * price) as total_linea
 
     FROM stg_lineas_pedido
     join stg_productos on stg_productos.product_id = stg_lineas_pedido.product_id

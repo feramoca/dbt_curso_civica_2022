@@ -12,19 +12,23 @@ WITH src_orders AS (
 orders AS (
     SELECT
           order_id
-        , md5 (replace ( promo_id, ' ', '')) as promo_id
-        , promo_id as promo
+        , case 
+            when promo_id = '' then null
+            else md5 (replace ( promo_id, ' ', ''))
+            end as promo_id
         , order_cost
-        , cast (created_at as date) as created_at
+        , cast (created_at as datetime) as created_at
         , tracking_id
         , address_id
-        , cast (delivered_at as date) as delivered_at
+        , cast (delivered_at as datetime) as delivered_at
         , status
+        , md5 (status) as status_id
         , shipping_cost
         , user_id
         , shipping_service
+        , md5 (shipping_service) as shipping_service_id        
         , order_total
-        , cast (estimated_delivery_at as date) as estimated_delivery_at
+        , cast (estimated_delivery_at as datetime) as estimated_delivery_at
         
     FROM src_orders
     )

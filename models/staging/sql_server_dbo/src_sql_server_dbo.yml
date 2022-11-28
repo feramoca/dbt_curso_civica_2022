@@ -2,7 +2,8 @@ version: 2
 
 sources:
   - name: sql_server_dbo
-    description: "Datos extraidos desde SQL Server"  
+    description: >
+        Datos extraidos desde SQL Server  
     schema: sql_server_dbo # this is the schema our raw data lives in
     database: |  
         {%- if  target.name == 'user_dev' -%} dev_bronze_db_alumno11 
@@ -26,24 +27,29 @@ sources:
         description: "Tabla de direcciones. Tanto clientes como pedidos"
         columns:
           - name: address_id
-            description: ""
+            description: >
+                Id de la dirección, tanto del pedido como del cliente.            
             tests:
               - not_null
               - unique
           - name: country
-            description: ""
+            description: >
+                País del pedido            
             tests:
               - not_null            
           - name: zipcode
-            description: ""
+            description: >
+                Código postal
             tests:
               - not_null            
           - name: address
-            description: ""
+            description: >
+                Dirección
             tests:
               - not_null            
           - name: state
-            description: ""
+            description: >
+                Estado (el equivalente a Comunidad Autónoma)
             tests:
               - not_null            
           - name: _fivetran_deleted
@@ -52,37 +58,36 @@ sources:
             description: ""
 
       - name: events
-        description: "Eventos transcurridos en el WEB"
+        description: >
+            Eventos de la página web. Indica los productos vistos, si se añaden al carro, si se formaliza el pedido, ...
         columns:
           - name: event_id
-            description: ""
+            description: >
+                Id del evento
             tests:
               - not_null
               - unique            
           - name: created_at
-            description: ""
+            description: >
+                Fecha del evento.
           - name: product_id
-            description: ""
-            tests:
-              - not_null
-              - relationships:
-                  to: source('sql_server_dbo','products')
-                  field: product_id            
+            description: >
+                Id del producto, no aparece si se hace un checkout. 
           - name: session_id
-            description: ""
+            description: >
+                Id de la sesión. Una sesión es una "visita" con muchos eventos
           - name: page_url
-            description: ""
+            description: >
+                URL de la página visitada
           - name: order_id
-            description: ""
-            tests:
-              - not_null
-              - relationships:
-                  to: source('sql_server_dbo','orders')
-                  field: order_id            
+            description: >
+                Si se hace checkout, id del pedido que genera        
           - name: event_type
-            description: ""
+            description: >
+                Tipo del evento. Página vista, añadir al carro, check_out,...
           - name: user_id
-            description: ""
+            description: >
+                Id del usuario que genera los eventos
             tests:
               - not_null
               - relationships:
@@ -94,24 +99,28 @@ sources:
             description: ""
 
       - name: order_items
-        description: "Artículos del pedido"
+        description: >
+            Artículos que van en un pedido con las cantidades
         columns:
           - name: order_id       
-            description: ""
+            description: >
+                Id del pedido al que van asociados los artículos
             tests:
               - not_null
               - relationships:
                   to: source('sql_server_dbo','orders')
                   field: order_id        
           - name: product_id
-            description: ""
+            description: >
+                Id del producto que va en el pedido
             tests:
               - not_null
               - relationships:
                   to: source('sql_server_dbo','products')
                   field: product_id            
           - name: quantity
-            description: ""
+            description: >
+                Cantidad de ese producto que va en el pedido
             tests:
               - not_null
               #- positive_values			             
@@ -121,76 +130,94 @@ sources:
             description: ""
 
       - name: orders
-        description: "Pedidos"
+        description: >
+            Listado de pedidos. Totales, usuario, promo, fechas entrega, agencia transportes, ...
         columns:
           - name: order_id
-            description: ""
+            description: >
+                Id del pedido
             tests:
               - unique
               - not_null
           - name: promo_id
-            description: ""
-            tests:
-              - relationships:
-                  to: source('sql_server_dbo','promos')
-                  field: promo_id            
+            description: >
+                Id de la promo asociada al pedido. Como viene en varchar hay que convertirlo a clave primaria con md5. Antes los vacíos los convierto en null
+                Relacionado con Promos.Promo_id
           - name: order_cost
-            description: ""
+            description: >
+                Coste del pedido
             tests:
               - not_null
               #- positive_values			            
           - name: created_at
-            description: ""
+            description: >
+                Fecha del pedido. Hay que hacer un cast para convertir el texto en fecha
           - name: tracking_id
-            description: ""
+            description: >
+                Tracking del pedido
           - name: address_id
-            description: ""
+            description: >
+                Dirección de envío del pedido.
+                Relacionado con Addresses.Address_id
             tests:
               - not_null
               - relationships:
                   to: source('sql_server_dbo','addresses')
                   field: address_id            
           - name: delivered_at
-            description: ""
+            description: >
+                Fecha de envío del pedido. Hay que hacer un cast para convertir el texto en fecha
           - name: status
-            description: ""
+            description: >
+                Estado del pedido. En preparación, enviado, entregado,...
           - name: shipping_cost
-            description: ""
+            description: >
+                Coste del envío del pedido
           - name: user_id
-            description: ""
+            description: >
+                ID del cliente.
+                Relacionado con USERS.User_id
             tests:
               - not_null
               - relationships:
                   to: source('sql_server_dbo','users')
                   field: user_id            
           - name: shipping_service
-            description: ""
+            description: >
+                Agencia de transportes que lleva el pedido.
           - name: order_total
-            description: ""
+            description: >
+                Precio total del pedido (incluidos gastos de envío y descuentos). Es lo que paga el cliente.
             tests:
               - not_null
               #- positive_values			              
           - name: estimated_delivery_at
-            description: ""
+            description: >
+                Fecha estimada de entrega. Se hace un cast para convertir el texto en fecha
           - name: _fivetran_deleted
             description: ""
           - name: _fivetran_synced
             description: ""
 
       - name: products
-        description: "Productos"
+        description: >
+            Productos de la web
         columns:
           - name: product_id
-            description: ""
+            description: >
+                ID del producto
             tests:
               - unique
               - not_null            
           - name: name
-            description: ""
+            description: >
+                Nombre del producto
           - name: inventory
-            description: ""
+            description: >
+                Unidades en stock del producto
           - name: price
-            description: ""
+            description: >
+                Precio del producto
             tests:
               - not_null
               #- positive_values			              
@@ -200,55 +227,67 @@ sources:
             description: ""
 
       - name: promos
-        description: "Promo aplicada al pedido"
+        description: >
+            Listado de promos
         columns:
           - name: promo_id
-            description: ""
+            description: >
+                Id de la promo. Es un varchar. Hay que generar un md5 (en origen es un varchar, antes le quito los espacios)
             tests:
               - unique
               - not_null           
           - name: discount
-            description: ""
+            description: >
+                Importe del descuento. En € no en %
           - name: status
-            description: ""
+            description: >
+                Estado en el que se encuentra la promoción. Activa, inactiva
           - name: _fivetran_deleted
             description: ""
           - name: _fivetran_synced
             description: ""
 
       - name: users
-        description: "Clientes"
+        description: >
+            Usuarios, con datos de contacto
         columns:
           - name: user_id
-            description: ""
+            description: >
+                Id del usuario
             tests:
               - unique
               - not_null          
           - name: phone_number
-            description: ""
-          - name: total_orders
-            description: ""
+            description: >
+                Teléfono del cliente
           - name: first_name
-            description: ""
+            description: >
+                Nombre del cliente
             tests:
               - not_null           
           - name: last_name
-            description: ""
+            description: >
+                Apellidos del cliente
             tests:
               - not_null            
           - name: created_at
-            description: ""
+            description: >
+                Fecha de creación del cliente. Viene en varchar. Hay que hacer un cast para convertir en fecha
           - name: address_id
-            description: ""
+            description: >
+                Id de la dirección del cliente.
+                Referencia a Addresses.Address_id
             tests:
               - not_null 
               - relationships:
                   to: source('sql_server_dbo','addresses')
                   field: address_id            
           - name: updated_at
-            description: ""
+            description: >
+                Fecha de actualización del cliente. Viene en varchar. Hay que hacer un cast para convertir en fecha
           - name: email
-            description: ""
+            description: >
+                Correo electrónico del cliente 
             tests:
               - unique
               - not_null           

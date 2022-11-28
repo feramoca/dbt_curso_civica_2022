@@ -22,6 +22,7 @@ fct_users AS (
         , Total_Unidades_Compradas_Cliente
         , Articulos_Cliente
         , Articulos_Distintos_Cliente
+        , Fecha_ultimo_pedido
         
     FROM src_clientes_pedidos
     join src_clientes_articulos on src_clientes_articulos.user_id = src_clientes_pedidos.user_id

@@ -1,0 +1,16 @@
+WITH src_events AS (
+    SELECT *
+    FROM {{ source('sql_server_dbo', 'events') }}
+    ),
+
+events_renamed AS (
+    SELECT
+        hour(created_at) as creado_el,
+        count(distinct session_id) as unique_session_number
+    FROM src_events
+    group by 1
+    )
+
+SELECT
+avg (unique_session_number) as avg_session
+FROM events_renamed
