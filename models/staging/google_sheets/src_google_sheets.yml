@@ -41,3 +41,4 @@ sources:
                 Id del producto. Enlaza con la tabla products
           - name: _fivetran_synced
             description: ""
+            
