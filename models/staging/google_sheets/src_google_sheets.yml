@@ -18,25 +18,6 @@ sources:
 
 
     tables:
-      - name: budget_fro
-        description: "Tabla de presupuestos"
-        columns:
-          - name: _row
-            description: ""
-          - name: quantity
-            description: ""
-          - name: month
-            description: ""
-          - name: product_id
-            tests:
-              - not_null
-              - relationships:
-                  to: source('sql_server_dbo','products')
-                  field: product_id          
-            description: ""
-          - name: _fivetran_synced
-            description: ""
-
       - name: budget
         description: >
             Tabla Snapshoot del stock de almacén a final de mes

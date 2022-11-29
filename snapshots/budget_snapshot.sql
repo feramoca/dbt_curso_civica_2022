@@ -11,6 +11,6 @@
     )
 }}
 
-select * from {{ source('google_sheets', 'budget_fro') }}
+select * from {{ source('google_sheets', 'budget') }}
 
 {% endsnapshot %}
