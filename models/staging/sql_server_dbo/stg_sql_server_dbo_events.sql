@@ -12,7 +12,7 @@ WITH src_events AS (
 events AS (
     SELECT
           event_id
-        , cast (created_at as date) as created_at
+        , cast (created_at as datetime) as created_at
         , case 
             when product_id = '' then null
             else product_id

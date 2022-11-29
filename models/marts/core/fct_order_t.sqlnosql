@@ -36,6 +36,23 @@ dim_fecha as (
     from {{ ref('dim_fecha')}}
 ),
 
+dim_addresses as (
+    select *
+    from {{ ref('dim_addresses')}}
+),
+
+dim_state as (
+    select *
+    from {{ ref('dim_state')}}
+),
+
+temp as (
+    select *
+    from {{ ref('stg_ab_schema_tiempo')}}
+),
+
+
+
 
 Pedidos_Cliente AS (
     SELECT
@@ -66,7 +83,9 @@ Pedidos_Cliente AS (
         --, estimated_delivery_at as Fecha_Prevista_Entrega
         , fechaprevista.id_date as Fecha_Prevista_Entrega_id
         , ped_agreg.Dias_en_Entregar
-
+        --,{{temperatura_valor('dim_addresses.state','pedidos.fecha_pedido_id', 'h05')}} as temperatura   
+        , temp.estacion
+        , h05
 
     FROM pedidos
     left join promos on promos.id_promo = pedidos.promo_id
@@ -75,7 +94,10 @@ Pedidos_Cliente AS (
     join dim_fecha fechacreacion on fechacreacion.fecha = cast (pedidos.created_at as date)
     join dim_fecha fechaentrega on fechaentrega.fecha = cast (pedidos.delivered_at as date)
     join dim_fecha fechaprevista on fechaprevista.fecha = cast (pedidos.estimated_delivery_at as date)
-       
+    join dim_addresses on dim_addresses.address_id = pedidos.address_id      
+    join dim_state on dim_state.state = dim_addresses.state
+    join temp on temp.estacion = dim_state.estacion
+      
 
     )
 

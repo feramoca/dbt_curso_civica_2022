@@ -1,0 +1,146 @@
+version: 2
+
+sources:
+  - name: ab_schema
+    description: "Datos extraidos desde ab_schema"
+    schema: ab_schema # this is the schema our raw data lives in
+    database: |  
+        {%- if  target.name == 'user_dev' -%} dev_bronze_db_alumno11 
+        {%- elif target.name == 'ci' -%} dev_bronze_db_alumno11 
+        {%- elif target.name == 'pro'-%} pro_bronze_db_alumno11  
+        {%- else -%} {{target.database}}_bronze_db_alumno11
+        {%- endif -%}
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+##sources:
+##  - name: ab_schema
+##    description: ""
+##    database: dev_bronze_db_alumno11
+    tables:
+      - name: tiempo3
+        description: ""
+        columns:
+          - name: ano
+            description: ""
+          - name: dia
+            description: ""
+          - name: h01
+            description: ""
+          - name: h02
+            description: ""
+          - name: h03
+            description: ""
+          - name: h04
+            description: ""
+          - name: h05
+            description: ""
+          - name: h06
+            description: ""
+          - name: h07
+            description: ""
+          - name: h08
+            description: ""
+          - name: h09
+            description: ""
+          - name: h10
+            description: ""
+          - name: h11
+            description: ""
+          - name: h12
+            description: ""
+          - name: h13
+            description: ""
+          - name: h14
+            description: ""
+          - name: h15
+            description: ""
+          - name: h16
+            description: ""
+          - name: h17
+            description: ""
+          - name: h18
+            description: ""
+          - name: h19
+            description: ""
+          - name: h20
+            description: ""
+          - name: h21
+            description: ""
+          - name: h22
+            description: ""
+          - name: h23
+            description: ""
+          - name: h24
+            description: ""
+          - name: mes
+            description: ""
+          - name: v01
+            description: ""
+          - name: v02
+            description: ""
+          - name: v03
+            description: ""
+          - name: v04
+            description: ""
+          - name: v05
+            description: ""
+          - name: v06
+            description: ""
+          - name: v07
+            description: ""
+          - name: v08
+            description: ""
+          - name: v09
+            description: ""
+          - name: v10
+            description: ""
+          - name: v11
+            description: ""
+          - name: v12
+            description: ""
+          - name: v13
+            description: ""
+          - name: v14
+            description: ""
+          - name: v15
+            description: ""
+          - name: v16
+            description: ""
+          - name: v17
+            description: ""
+          - name: v18
+            description: ""
+          - name: v19
+            description: ""
+          - name: v20
+            description: ""
+          - name: v21
+            description: ""
+          - name: v22
+            description: ""
+          - name: v23
+            description: ""
+          - name: v24
+            description: ""
+          - name: estacion
+            description: ""
+          - name: magnitud
+            description: ""
+          - name: municipio
+            description: ""
+          - name: provincia
+            description: ""
+          - name: punto_muestreo
+            description: ""
+          - name: _airbyte_ab_id
+            description: ""
+          - name: _airbyte_emitted_at
+            description: ""
+          - name: _airbyte_normalized_at
+            description: ""
+          - name: _airbyte_tiempo3_hashid
+            description: ""      

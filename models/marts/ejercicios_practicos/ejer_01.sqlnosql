@@ -1,0 +1,12 @@
+WITH src_usuarios AS (
+    SELECT * 
+    FROM {{ ref('dim_users') }}
+    ),
+
+usuarios AS (
+    SELECT
+        count (user_id) as n_usuarios
+    FROM src_usuarios
+    )
+
+SELECT * FROM usuarios

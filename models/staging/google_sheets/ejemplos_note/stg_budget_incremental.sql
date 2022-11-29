@@ -8,7 +8,7 @@
 
 WITH stg_budget_products AS (
     SELECT * 
-    FROM {{ source('google_sheets','budget_fro') }}
+    FROM {{ source('google_sheets','budget') }}
     ),
 
 renamed_casted AS (

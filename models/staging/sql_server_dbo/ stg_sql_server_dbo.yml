@@ -1,0 +1,240 @@
+version: 2
+
+
+models:
+  - name: stg_sql_server_dbo_addresses
+    description: >
+        Direcciones de clientes
+    columns:
+      - name: address_id
+        description: >
+            Id de la dirección, tanto del pedido como del cliente.
+
+      - name: country
+        description: >
+            País del pedido
+
+      - name: zipcode
+        description: >
+            Código postal
+
+      - name: address
+        description: >
+            Dirección
+
+      - name: state
+        description: >
+            Estado (el equivalente a Comunidad Autónoma)
+
+  - name: stg_sql_server_dbo_events
+    description: >
+        Eventos de la página web. Indica los productos vistos, si se añaden al carro, si se formaliza el pedido, ...
+    columns:
+      - name: event_id
+        description: >
+            Id del evento
+
+      - name: created_at
+        description: >
+            Fecha del evento. Se hace un cast para convertir el texto en fecha
+
+      - name: product_id
+        description: >
+            Id del producto, no aparece si se hace un checkout. 
+            Se ha hecho una transformación en este campo. Si el artículo venía vacío no era null, lo convertimos en null para poder contar los artículos vistos.
+
+      - name: session_id
+        description: >
+            Id de la sesión. Una sesión es una "visita" con muchos eventos
+
+      - name: page_url
+        description: >
+            URL de la página visitada
+
+      - name: order_id
+        description: >
+            Si se hace checkout, id del pedido que genera
+
+      - name: event_type
+        description: >
+            Tipo del evento. Página vista, añadir al carro, check_out,...
+
+      - name: user_id
+        description: >
+            Id del usuario que genera los eventos
+
+
+  - name: stg_sql_server_dbo_order_items
+    description: >
+        Artículos que van en un pedido con las cantidades
+    columns:
+      - name: order_id
+        description: >
+            Id del pedido al que van asociados los artículos
+
+      - name: product_id
+        description: >
+            Id del producto que va en el pedido
+
+      - name: quantity
+        description: >
+            Cantidad de ese producto que va en el pedido
+
+
+  - name: stg_sql_server_dbo_orders
+    description: >
+        Listado de pedidos. Totales, usuario, promo, fechas entrega, agencia transportes, ...
+    columns:
+      - name: order_id
+        description: >
+            Id del pedido
+
+      - name: promo_id
+        description: >
+            Id de la promo asociada al pedido. Como viene en varchar la convertimos en una clave primaria con un md5 (antes le quitamos los espacios al varchar)
+            Relacionado con Promos.Promo_id
+            # Ver si quito el md5 de la promo vacía
+
+      - name: order_cost
+        description: >
+            Coste del pedido
+
+      - name: created_at
+        description: >
+            Fecha del pedido. Se hace un cast para convertir el texto en fecha
+
+      - name: tracking_id
+        description: >
+            Tracking del pedido
+
+      - name: address_id
+        description: >
+            Dirección de envío del pedido.
+            Relacionado con Addresses.Address_id
+
+      - name: delivered_at
+        description: >
+            Fecha de envío del pedido. Se hace un cast para convertir el texto en fecha
+
+      - name: status
+        description: >
+            Estado del pedido. En preparación, enviado, entregado,...
+
+      - name: status_id
+        description: >
+            ID creada con md5 en base a status para poder crear la dimensión.
+
+      - name: shipping_cost
+        description: >
+            Coste del envío del pedido
+
+      - name: user_id
+        description: >
+            ID del cliente.
+            Relacionado con USERS.User_id
+
+      - name: shipping_service
+        description: >
+            Agencia de transportes que lleva el pedido.
+
+      - name: shipping_service_id
+        description: >
+            ID creada con md5 en base a shipping service para poder crear la dimensión.
+
+      - name: order_total
+        description: >
+            Precio total del pedido (incluidos gastos de envío y descuentos). Es lo que paga el cliente.
+
+      - name: estimated_delivery_at
+        description: >
+            Fecha estimada de entrega. Se hace un cast para convertir el texto en fecha
+
+
+  - name: stg_sql_server_dbo_products
+    description: >
+        Productos de la web
+    columns:
+      - name: product_id
+        description: >
+            ID del producto
+
+      - name: name
+        description: >
+            Nombre del producto
+
+      - name: inventory
+        description: >
+            Unidades en stock del producto
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0  # (Optional)
+              max_value: 100 # (Optional)
+              # row_condition: "id is not null" # (Optional)
+              # strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)            
+
+      - name: price
+        description: >
+            Precio del producto
+
+      - name: stock
+        description: >
+            Campo creado en base al stock. Para indicar a compras y almacén si el stock del artílo es óptimo, bajo o alto.
+
+
+  - name: stg_sql_server_dbo_promos
+    description: >
+        Listado de promos
+    columns:
+      - name: id_promo
+        description: >
+            Id de la promo. Generado con un md5 (en origen es un varchar, antes le quito los espacios)
+
+      - name: promo_nombre
+        description: >
+            El antiguo promo_id
+
+      - name: discount
+        description: >
+            Importe del descuento. En € no en %
+
+      - name: status
+        description: >
+            Estado en el que se encuentra la promoción. Activa, inactiva
+
+
+  - name: stg_sql_server_dbo_users
+    description: >
+        Usuarios, con datos de contacto
+    columns:
+      - name: user_id
+        description: >
+            Id del usuario
+
+      - name: phone_number
+        description: >
+            Teléfono del cliente
+
+      - name: first_name
+        description: >
+            Nombre del cliente
+
+      - name: last_name
+        description: >
+            Apellidos del cliente
+
+      - name: created_at
+        description: >
+            Fecha de creación del cliente. Se hace un cast para convertir el varchar en fecha
+
+      - name: address_id
+        description: >
+            Id de la dirección del cliente.
+            Referencia a Addresses.Address_id
+
+      - name: updated_at
+        description: >
+            Fecha de actualización del cliente. Se hace un cast para convertir el varchar en fecha
+
+      - name: email
+        description: >
+            Correo electrónico del cliente                                                

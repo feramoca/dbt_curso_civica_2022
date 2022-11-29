@@ -14,6 +14,7 @@ Clientes_agregados AS (
         , max (order_total) as Importe_Pedido_Max
         , min (order_total) as Importe_Pedido_Min
         , count (distinct address_id) as Direcciones_Distintas_Cliente
+        , max (created_at) as Fecha_ultimo_pedido
         
     FROM pedidos
     -- quitar el where, es para hacer pruebas

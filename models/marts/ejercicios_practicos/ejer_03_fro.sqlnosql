@@ -1,0 +1,30 @@
+WITH 
+
+pedidos AS (
+    SELECT * 
+    FROM {{ ref('stg_sql_server_dbo_orders') }}
+    ),
+
+Clientes_agregados AS (
+    SELECT
+        user_id
+        , count (distinct pedidos.order_id) as Numero_Pedidos_Cliente
+    FROM pedidos
+    group by 1
+    )
+    
+
+SELECT
+    CASE
+        WHEN numero_pedidos_cliente >=3 THEN '3+'
+        else cast(numero_pedidos_cliente as varchar)
+        end as numero_pedidos_cliente,
+        count(distinct user_id) as users
+
+   
+
+FROM Clientes_agregados
+group by 1
+order by 1;
+
+

@@ -18,21 +18,26 @@ sources:
 
 
     tables:
-      - name: budget_fro
-        description: "Tabla de presupuestos"
+      - name: budget
+        description: >
+            Tabla Snapshoot del stock de almacén a final de mes
         columns:
           - name: _row
-            description: ""
+            description: >
+                Identificador de la columna
           - name: quantity
-            description: ""
+            description: >
+                Cantidad del producto
           - name: month
-            description: ""
+            description: >
+                Mes del snapshoot
           - name: product_id
             tests:
               - not_null
               - relationships:
                   to: source('sql_server_dbo','products')
                   field: product_id          
-            description: ""
+            description: >
+                Id del producto. Enlaza con la tabla products
           - name: _fivetran_synced
             description: ""
