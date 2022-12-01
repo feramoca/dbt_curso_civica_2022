@@ -98,6 +98,15 @@ models:
       - name: order_cost
         description: >
             Coste del pedido
+            
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0  # (Optional)
+              max_value: 10000 # (Optional)
+              #row_condition: "id is not null" # (Optional)
+              #strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
+
+
 
       - name: created_at
         description: >
@@ -238,3 +247,10 @@ models:
       - name: email
         description: >
             Correo electrónico del cliente                                                
+
+        tests:
+          - dbt_expectations.expect_column_values_to_match_regex_list:
+              regex_list: ["@[^.]*"]
+              match_on: any # (Optional. Default is 'any', which applies an 'OR' for each regex. If 'all', it applies an 'AND' for each regex.)
+              #row_condition: "id is not null" # (Optional)
+              #is_raw: True # (Optional)                          

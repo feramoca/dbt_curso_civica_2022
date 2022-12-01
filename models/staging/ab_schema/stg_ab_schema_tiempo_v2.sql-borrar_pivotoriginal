@@ -11,10 +11,13 @@ WITH src_tiempo AS (
 
 tiempo AS (
     SELECT
-          estacion
-        , magnitud
+          ano
+        , mes
+        , dia
+        , provincia
+        , estacion
         , punto_muestreo
-        , hora
+        , magnitud
         , temperatura
         
   
