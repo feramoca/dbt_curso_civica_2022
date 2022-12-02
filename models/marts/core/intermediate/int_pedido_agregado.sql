@@ -9,6 +9,11 @@ lineas AS (
     SELECT * 
     FROM {{ ref('stg_sql_server_dbo_order_items') }}
     ),
+
+direcciones AS (
+    SELECT * 
+    FROM {{ ref('stg_sql_server_dbo_addresses') }}
+    ),    
  
 Pedidos_agregados AS (
     SELECT
@@ -18,9 +23,12 @@ Pedidos_agregados AS (
         , pedidos.order_total
         , ((order_total) / (sum (quantity))) as Importe_Medio_Articulo
         , DATEDIFF(day, created_at, delivered_at) AS Dias_en_Entregar
+        , md5 (replace ( state, ' ', '')) as state_id 
+        , shipping_cost
     FROM pedidos
     join lineas on lineas.order_id = pedidos.order_id
-    group by pedidos.order_id, pedidos.order_total, Dias_en_Entregar
+    join direcciones on direcciones.address_id = pedidos.address_id
+    group by pedidos.order_id, pedidos.order_total, Dias_en_Entregar, state_id, shipping_cost
     order by pedidos.order_id asc
     
     )

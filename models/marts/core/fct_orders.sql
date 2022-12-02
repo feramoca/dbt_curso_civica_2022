@@ -18,7 +18,7 @@ promos as (
 
 Ped_agreg as (
     SELECT *
-    from {{ ref('pedido_agregado')}} 
+    from {{ ref('int_pedido_agregado')}} 
 ),    
 
 cli_agreg as (
