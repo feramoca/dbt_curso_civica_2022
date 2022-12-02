@@ -30,6 +30,20 @@ dim_fecha as (
     from {{ ref('dim_fecha')}}
 ),
 
+dim_addresses as (
+    select *
+    from {{ ref('dim_addresses')}}
+),
+
+dim_state as (
+    select *
+    from {{ ref('dim_state')}}
+),
+
+dim_tiempo as (
+    select *
+    from {{ ref('stg_ab_schema_tiempo')}}
+),
 
 Pedidos_Cliente AS (
     SELECT
@@ -60,6 +74,7 @@ Pedidos_Cliente AS (
         --, estimated_delivery_at as Fecha_Prevista_Entrega
         , fechaprevista.id_date as Fecha_Prevista_Entrega_id
         , ped_agreg.Dias_en_Entregar
+        , dim_tiempo.Estacion
 
 
     FROM pedidos
@@ -67,8 +82,12 @@ Pedidos_Cliente AS (
     join ped_agreg on ped_agreg.order_id = pedidos.order_id
     join cli_agreg on cli_agreg.user_id = pedidos.user_id
     join dim_fecha fechacreacion on fechacreacion.fecha = cast (pedidos.created_at as date)
-    join dim_fecha fechaentrega on fechaentrega.fecha = cast (pedidos.delivered_at as date)
-    join dim_fecha fechaprevista on fechaprevista.fecha = cast (pedidos.estimated_delivery_at as date)
+    left join dim_fecha fechaentrega on fechaentrega.fecha = cast (pedidos.delivered_at as date)
+    left join dim_fecha fechaprevista on fechaprevista.fecha = cast (pedidos.estimated_delivery_at as date) 
+    join dim_addresses on dim_addresses.address_id = pedidos.address_id
+    join dim_state on dim_state.state_id = dim_addresses.state_id
+    --join dim_tiempo on dim_tiempo.Estacion = dim_state.Estacion
+    left join dim_tiempo on (dim_tiempo.Estacion = dim_state.Estacion) and (dim_tiempo.fecha_inventada = cast (pedidos.created_at as date))
        
 
     )

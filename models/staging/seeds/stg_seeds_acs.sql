@@ -11,9 +11,6 @@ src_ace AS (
     FROM {{ ref('ace') }}
     ), 
 
-
-
-
 CE_shipping_service  AS (
     SELECT
           md5 (replace ( state, ' ', '')) as state_id 
@@ -22,8 +19,5 @@ CE_shipping_service  AS (
         , variable
     FROM src_ace
     )
-
-
-
 
 SELECT * FROM CE_shipping_service

@@ -8,9 +8,9 @@ tmp AS (
 tem AS (
     SELECT
           *
-        , concat (ano,mes,dia) as id_fecha
-        --, (replace ( field_name, 'H', '')) as hora
-        ,  cast ((replace ( field_name, 'H', '')) as integer) as hora2
+        , concat (ano,mes,'0',dia) as id_fecha
+        ,  cast ((replace ( field_name, 'H', '')) as integer) as hora
+        , '20210211' as fecha_inventada
     FROM tmp
     where value <> 0
     )

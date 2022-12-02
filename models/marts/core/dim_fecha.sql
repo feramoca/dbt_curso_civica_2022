@@ -18,6 +18,7 @@ with date as (
 
 select
       date_day as fecha
+    , day(date_day) as aa
     , year(date_day)*10000+month(date_day)*100+day(date_day) as id_date
     , year(date_day) as anio
     , month(date_day) as mes

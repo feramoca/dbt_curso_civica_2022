@@ -1,8 +1,4 @@
-{{
-  config(
-    materialized='table'
-  )
-}}
+--tengo que revisar las fechas, que me quitan registros, son las marcadas con 4- ----
 
 WITH
 
@@ -73,8 +69,8 @@ Pedidos_Cliente AS (
     join ped_agreg on ped_agreg.order_id = pedidos.order_id
     join cli_agreg on cli_agreg.user_id = pedidos.user_id
     join dim_fecha fechacreacion on fechacreacion.fecha = cast (pedidos.created_at as date)
-    join dim_fecha fechaentrega on fechaentrega.fecha = cast (pedidos.delivered_at as date)
-    join dim_fecha fechaprevista on fechaprevista.fecha = cast (pedidos.estimated_delivery_at as date)
+    left join dim_fecha fechaentrega on fechaentrega.fecha = cast (pedidos.delivered_at as date)
+    left join dim_fecha fechaprevista on fechaprevista.fecha = cast (pedidos.estimated_delivery_at as date)
        
 
     )
