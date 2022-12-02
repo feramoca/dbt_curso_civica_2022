@@ -23,12 +23,12 @@ Ped_agreg as (
 
 cli_agreg as (
     SELECT *
-    from {{ ref('clientes_agregados_pedidos')}}
+    from {{ ref('int_clientes_agregados_pedidos')}}
 ),  
 
 cli_agreg as (
     SELECT *
-    from {{ ref('clientes_agregados_pedidos')}}
+    from {{ ref('int_clientes_agregados_pedidos')}}
 ),  
 
 dim_fecha as (

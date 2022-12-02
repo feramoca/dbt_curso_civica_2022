@@ -2,12 +2,12 @@ WITH
 
 src_clientes_pedidos AS (
     SELECT * 
-    FROM {{ ref('clientes_agregados_pedidos') }}
+    FROM {{ ref('int_clientes_agregados_pedidos') }}
     ),
 
 src_clientes_articulos AS (
     SELECT * 
-    FROM {{ ref('clientes_agregados_articulos') }}
+    FROM {{ ref('int_clientes_agregados_articulos') }}
     ),
 
 fct_users AS (
