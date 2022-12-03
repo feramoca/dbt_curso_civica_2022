@@ -1,0 +1,23 @@
+--tengo que revisar las fechas, que me quitan registros, son las marcadas con 4- ----
+
+WITH
+
+tabla_a AS (
+    SELECT * 
+    FROM {{ ref('stg_seeds_a') }}
+    ), 
+
+resultado AS (
+    SELECT
+          nombre
+        , color
+        ,{{juguete(ref('nombre','color')}}      
+
+
+    FROM tabla_a
+
+
+
+    )
+
+SELECT * FROM resultado

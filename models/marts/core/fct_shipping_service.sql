@@ -17,8 +17,8 @@ comp_shipping_service  AS (
     SELECT
           order_id 
         , src_ace.state
-        , ((fijo) + (variable * Total_Unidades_Pedido)) as euros
-        , shipping_cost        
+        , ((fijo) + (variable * Total_Unidades_Pedido)) as Porte_ACE
+        , shipping_cost as Porte_pagado        
         , Total_Unidades_Pedido
         , fijo
         , variable
