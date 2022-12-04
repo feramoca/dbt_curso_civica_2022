@@ -13,7 +13,8 @@ stg_productos as (
 
 fct_produts AS (
     SELECT
-          order_id
+          {{ dbt_utils.surrogate_key(['order_id', 'stg_lineas_pedido.product_id']) }}
+        , order_id
         , stg_lineas_pedido.product_id
         , quantity
         , price

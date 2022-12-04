@@ -13,11 +13,9 @@ aa AS (
           estacion
         --, created_at as Fecha_Pedido
         , '20210211' as fecha_inventada
-        , hora
-        --, avg (value) as kk
-        , value
+        , avg (temperatura_valor) as kk
     FROM dim_tiempo
-    --group by id_fecha, estacion
+    group by id_fecha, estacion
 
     )
 

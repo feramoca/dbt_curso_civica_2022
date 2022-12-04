@@ -39,7 +39,7 @@ Pedidos_Cliente AS (
         , hour (pedidos.created_at) as hora_pedido        
         , cast((hour (pedidos.created_at)) as int) as hora_pedido2                
         --, dim_kk.kk
-        , value
+        , temperatura_valor
     FROM pedidos
 
     join dim_fecha fechacreacion on fechacreacion.fecha = cast (pedidos.created_at as date)

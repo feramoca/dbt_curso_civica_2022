@@ -42,11 +42,6 @@ dim_state as (
     from {{ ref('dim_state')}}
 ),
 
-dim_kkss as (
-    select *
-    from {{ ref('dim_kk_v2')}}
-),
-
 dim_kk as (
     select *
     from {{ ref('stg_ab_schema_tiempo')}}
