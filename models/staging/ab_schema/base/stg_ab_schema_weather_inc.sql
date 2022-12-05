@@ -1,6 +1,6 @@
 {{ config(
     materialized='incremental',
-    unique_key = 'id_temp'    
+    unique_key = 'id_temp'
     ) 
     }}
 
