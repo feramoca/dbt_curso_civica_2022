@@ -8,9 +8,10 @@ src_a AS (
 src_b AS (
     SELECT 
         DISTINCT id
+        , dia
         , MAX(hora) AS hora
     FROM {{ ref('prueba_incremental') }}
-    GROUP BY 1
+    GROUP BY 1,2
     ),
 
 aa  AS (

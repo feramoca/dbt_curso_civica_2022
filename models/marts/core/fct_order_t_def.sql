@@ -44,7 +44,7 @@ dim_state as (
 
 dim_kk as (
     select *
-    from {{ ref('stg_ab_schema_tiempo')}}
+    from {{ ref('base_ab_schema_weather_unpi')}}
 ),
 
 
@@ -53,6 +53,7 @@ Pedidos_Cliente AS (
     SELECT
           pedidos.order_id
         --, created_at as Fecha_Pedido
+        , created_at
         , fechacreacion.id_date as Fecha_Pedido_id
         , promo_id
         , pedidos.user_id as Cliente
