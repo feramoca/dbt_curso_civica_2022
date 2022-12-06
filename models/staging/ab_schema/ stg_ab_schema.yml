@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_ab_schema_weather
+    description: "Unpivot de base_ab_schema_weather_max. Por fecha, temperatura por horas de las distintas estaciones"
+    columns:
+      - name: id_fecha
+        description: >
+            Id_fecha con al misma estructura de la dim_fecha. Generado a partir de Año,mes y día
+
+      - name: hora
+        description: >
+            Hora del registro temperatura. Se le quita la H para poder comparar horas
+
+      - name: estacion
+        description: >
+            Id de la estación que recoge el valor
+
+      - name: temperatura_valor
+        description: >
+            Valor en grados centígrados de la temperatura
+
+      - name: fecha_inventada
+        description: >
+            Fecha inventada para poder usar este modelo en los datos que tenemos (son de 2021)

@@ -1,3 +1,6 @@
+-----    - nouse - borrar cuando fctorder_t este completo
+
+
 --tengo que revisar las fechas, que me quitan registros, son las marcadas con 4- ----
 
 WITH
@@ -32,28 +35,11 @@ dim_fecha as (
     from {{ ref('dim_fecha')}}
 ),
 
-dim_addresses as (
-    select *
-    from {{ ref('dim_addresses')}}
-),
-
-dim_state as (
-    select *
-    from {{ ref('dim_state')}}
-),
-
-dim_kk as (
-    select *
-    from {{ ref('base_ab_schema_weather_unpi')}}
-),
-
-
 
 Pedidos_Cliente AS (
     SELECT
           pedidos.order_id
         --, created_at as Fecha_Pedido
-        , created_at
         , fechacreacion.id_date as Fecha_Pedido_id
         , promo_id
         , pedidos.user_id as Cliente
@@ -79,9 +65,6 @@ Pedidos_Cliente AS (
         --, estimated_delivery_at as Fecha_Prevista_Entrega
         , fechaprevista.id_date as Fecha_Prevista_Entrega_id
         , ped_agreg.Dias_en_Entregar
---- Temp
-        --, value        
-        , dim_kk.temperatura_valor
 
 
     FROM pedidos
@@ -91,12 +74,7 @@ Pedidos_Cliente AS (
     join dim_fecha fechacreacion on fechacreacion.fecha = cast (pedidos.created_at as date)
     left join dim_fecha fechaentrega on fechaentrega.fecha = cast (pedidos.delivered_at as date)
     left join dim_fecha fechaprevista on fechaprevista.fecha = cast (pedidos.estimated_delivery_at as date)
-    join dim_addresses on dim_addresses.address_id = pedidos.address_id
-    join dim_state on dim_state.state_id = dim_addresses.state_id    
-    left join dim_kk on (dim_kk.estacion = dim_state.estacion) and (dim_kk.hora = hour (pedidos.created_at)) and (dim_kk.fecha_inventada = fechacreacion.id_date)    
        
-
---where fechacreacion.id_date = 20210211
 
     )
 

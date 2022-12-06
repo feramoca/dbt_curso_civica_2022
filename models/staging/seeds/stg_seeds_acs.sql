@@ -17,6 +17,7 @@ CE_shipping_service  AS (
         , state
         , fijo
         , variable
+        , zona
     FROM src_ace
     )
 
