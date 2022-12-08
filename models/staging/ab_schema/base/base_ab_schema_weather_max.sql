@@ -1,7 +1,3 @@
-
-------- NO BORRAR --------------
-------este funciona, se queda con lo últimos valores de cada día
-
 WITH 
 
 src_a AS (
@@ -19,8 +15,6 @@ src_b AS (
         from {{ ref('base_ab_schema_weather')}} 
     GROUP BY 1,2,3,4
     ),
-
-
 
 tiempo AS (
     SELECT

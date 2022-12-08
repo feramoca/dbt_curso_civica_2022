@@ -5,9 +5,6 @@ src_estados AS (
     FROM {{ ref('estados') }}
     ), 
 
-
-
-
 states  AS (
     SELECT
           md5 (replace ( state, ' ', '')) as state_id
@@ -16,8 +13,5 @@ states  AS (
         , Estacion
     FROM src_estados
     )
-
-
-
 
 SELECT * FROM states

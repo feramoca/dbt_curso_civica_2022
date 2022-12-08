@@ -1,4 +1,3 @@
-
 WITH
 
 or_it AS (

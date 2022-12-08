@@ -1,4 +1,3 @@
-
 WITH
 
 dim_state AS (

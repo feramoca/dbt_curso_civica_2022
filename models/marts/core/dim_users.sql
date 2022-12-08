@@ -1,10 +1,6 @@
-{{
-  config(
-    materialized='table'
-  )
-}}
+WITH
 
-WITH stg_users AS (
+stg_users AS (
     SELECT * 
     FROM {{ ref('stg_sql_server_dbo_users') }}
     ),

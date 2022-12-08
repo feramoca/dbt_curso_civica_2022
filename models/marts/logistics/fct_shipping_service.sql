@@ -1,9 +1,8 @@
 WITH
 
-
 src_ace AS (
     SELECT * 
-    FROM {{ ref('stg_seeds_acs') }}
+    FROM {{ ref('stg_seeds_ace') }}
     ), 
 
 

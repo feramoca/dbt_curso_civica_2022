@@ -1,4 +1,3 @@
-
 WITH
 
 pedidos AS (

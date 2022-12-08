@@ -1,4 +1,3 @@
-
 WITH
 
 tmp AS (
@@ -12,7 +11,6 @@ tem AS (
         , cast ((replace ( field_name, 'H', '')) as integer) as hora
         , estacion
         , value as temperatura_valor
-        --, '20210211' as fecha_inventada
         , case 
             when id_fecha = 20221205 then '20210210'
             when id_fecha = 20221206 then '20210211'
