@@ -16,6 +16,7 @@ dim_addresses AS (
         , zipcode
         , address
         , state
+        , md5 (replace ( state, ' ', '')) as state_id        
     FROM stg_addresses
     )
 

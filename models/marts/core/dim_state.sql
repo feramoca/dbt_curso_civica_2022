@@ -3,13 +3,15 @@ WITH
 
 dim_state AS (
     SELECT * 
-    FROM {{ ref('stg_sql_server_dbo_addresses') }}
+    FROM {{ ref('stg_seeds_states') }}
     ), 
 
 estate AS (
     SELECT
-          state
-          ,'28079056_87_98' as estacion
+          state_id
+        , state
+        , Postal_Abbreviation
+        , Estacion
     FROM dim_state
     
     )

@@ -1,0 +1,52 @@
+State,Postal_Abbreviation,Densidad_Poblacion,Poblacion,Zona,Fijo,Variable
+Kansas,KS,14,2934582,1,2,0.8
+Arkansas,AR,22,3025891,2,3,0.7
+Colorado,CO,22,5812069,2,3,0.7
+Iowa,IA,22,3193079,2,3,0.7
+Missouri,MO,34,6168187,2,3,0.6
+Nebraska,NE,10,1963692,2,3,0.8
+New York,NY,137,19835913,2,3,0.3
+Oklahoma,OK,22,3986639,2,3,0.7
+Texas,TX,42,29527941,2,3,0.6
+Alabama,AL,36,5039877,3,3.5,0.6
+Arizona,AZ,25,7276316,3,3.5,0.7
+California,CA,93,39237836,3,3.5,0.5
+Connecticut,CT,248,3605597,3,3.5,0.2
+Delaware,DE,153,1003384,3,3.5,0.2
+District of Columbia,DC,300,6385162,3,3.5,0.2
+Florida,FL,128,21781128,3,3.5,0.3
+Georgia,GA,70,10799566,3,3.5,0.5
+Idaho,ID,8,1900923,3,3.5,1
+Illinois,IL,84,12671469,3,3.5,0.5
+Indiana,IN,72,6805985,3,3.5,0.5
+Kentucky,KY,43,4509394,3,3.5,0.6
+Louisiana,LA,34,4624047,3,3.5,0.6
+Maine,ME,15,1372247,3,3.5,0.8
+Maryland,MD,188,6165129,3,3.5,0.2
+Massachusetts,MA,252,6984723,3,3.5,0.2
+Michigan,MI,40,10050811,3,3.5,0.6
+Minnesota,MN,25,5707390,3,3.5,0.7
+Mississippi,MS,24,2949965,3,3.5,0.7
+Montana,MT,3,1104271,3,3.5,1
+Nevada,NV,11,3143991,3,3.5,0.8
+New Hampshire,NH,56,1388992,3,3.5,0.5
+New Jersey,NJ,393,9267130,3,3.5,0.2
+New Mexico,NM,7,2115877,3,3.5,1
+North Carolina,NC,76,10551162,3,3.5,0.5
+North Dakota,ND,4,774948,3,3.5,1
+Ohio,OH,101,11780017,3,3.5,0.3
+Oregon,OR,17,4246155,3,3.5,0.8
+Pennsylvania,PA,107,12964056,3,3.5,0.3
+Rhode Island,RI,264,1095610,3,3.5,0.2
+South Carolina,SC,63,5190705,3,3.5,0.5
+South Dakota,SD,4,895376,3,3.5,1
+Tennessee,TN,63,6975218,3,3.5,0.5
+Utah,UT,15,3337975,3,3.5,0.8
+Vermont,VT,25,645570,3,3.5,0.7
+Virginia,VA,78,8642274,3,3.5,0.5
+Washington,WA,42,7738692,3,3.5,0.6
+West Virginia,WV,28,1782959,3,3.5,0.7
+Wisconsin,WI,34,5895908,3,3.5,0.6
+Wyoming,WY,2,578803,3,3.5,1
+Alaska,AK,0,732673,4,5,2
+Hawaii,HI,50,1441553,4,5,2

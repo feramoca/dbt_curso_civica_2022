@@ -1,0 +1,52 @@
+State,Postal_Abbreviation,Estacion
+Alabama,AL,54
+Alaska,AK,56
+Arizona,AZ,58
+Arkansas,AR,59
+California,CA,8
+Colorado,CO,16
+Connecticut,CT,18
+Delaware,DE,24
+Florida,FL,4
+Georgia,GA,35
+Hawaii,HI,36
+Idaho,ID,38
+Illinois,IL,39
+Indiana,IN,54
+Iowa,IA,56
+Kansas,KS,58
+Kentucky,KY,59
+Louisiana,LA,8
+Maine,ME,16
+Maryland,MD,18
+Massachusetts,MA,24
+Michigan,MI,4
+Minnesota,MN,35
+Mississippi,MS,36
+Missouri,MO,38
+Montana,MT,39
+Nebraska,NE,54
+Nevada,NV,56
+New Hampshire,NH,58
+New Jersey,NJ,59
+New Mexico,NM,8
+New York,NY,16
+North Carolina,NC,18
+North Dakota,ND,24
+Ohio,OH,4
+Oklahoma,OK,35
+Oregon,OR,36
+Pennsylvania,PA,38
+Rhode Island,RI,39
+South Carolina,SC,54
+South Dakota,SD,56
+Tennessee,TN,58
+Texas,TX,59
+Utah,UT,8
+Vermont,VT,16
+Virginia,VA,18
+Washington,WA,24
+West Virginia,WV,4
+Wisconsin,WI,35
+Wyoming,WY,36
+District of Columbia,DC,38

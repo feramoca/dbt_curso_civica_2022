@@ -46,7 +46,7 @@ sources:
             description: >
                 Dirección
             tests:
-              - not_null            
+              - not_null
           - name: state
             description: >
                 Estado (el equivalente a Comunidad Autónoma)
@@ -148,7 +148,7 @@ sources:
                 Coste del pedido
             tests:
               - not_null
-              #- positive_values			            
+              - positive_values			            
           - name: created_at
             description: >
                 Fecha del pedido. Hay que hacer un cast para convertir el texto en fecha

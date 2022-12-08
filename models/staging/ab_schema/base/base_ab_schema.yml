@@ -1,0 +1,257 @@
+version: 2
+
+models:
+  - name: base_ab_schema_weather
+    description: "Incremental que recoge los datos del source tomando como referencia la fecha de _AIRBYTE_EMITTED_AT"
+    columns:
+      - name: ano
+        description: >
+            Año de la toma del valor
+
+      - name: mes
+        description: >
+            Mes de la toma del valor
+
+      - name: dia
+        description: >
+            Día de la toma del valor
+
+      - name: provincia
+        description: >
+            Provincia de la toma del valor
+
+      - name: estacion
+        description: >
+            Id de la estación que recoge los valores
+
+      - name: punto_muestreo
+        description: >
+            Punto de muestreo que recoge los valores. Contempla la provincia, la estación y la magnitud
+
+      - name: magnitud
+        description: >
+            Magnitud del valor reflejado en los campos hora. 80 RADIACIÓN ULTRAVIOLETA Mw/m2, 81 VELOCIDAD VIENTO m/s, 82 DIR. DE VIENTO, 83 TEMPERATURA ºC, 86 HUMEDAD RELATIVA %, 87 PRESION BARIOMETRICA mb, 88 RADIACION SOLAR W/m2, 89 PRECIPITACIÓN l/m2 
+
+      - name: h01
+        description: >
+            Valor de la magnitud en la hora 1
+
+      - name: h02
+        description: >
+            Valor de la magnitud en la hora 2
+
+      - name: h03
+        description: >
+            Valor de la magnitud en la hora 3
+
+      - name: h04
+        description: >
+            Valor de la magnitud en la hora 4
+
+      - name: h05
+        description: >
+            Valor de la magnitud en la hora 5
+
+      - name: h06
+        description: >
+            Valor de la magnitud en la hora 6
+
+      - name: h07
+        description: >
+            Valor de la magnitud en la hora 7
+
+      - name: h08
+        description: >
+            Valor de la magnitud en la hora 8
+
+      - name: h09
+        description: >
+            Valor de la magnitud en la hora 9
+
+      - name: h10
+        description: >
+            Valor de la magnitud en la hora 10
+
+      - name: h11
+        description: >
+            Valor de la magnitud en la hora 11
+
+      - name: h12
+        description: >
+            Valor de la magnitud en la hora 12
+
+      - name: h13
+        description: >
+            Valor de la magnitud en la hora 13
+
+      - name: h14
+        description: >
+            Valor de la magnitud en la hora 14
+
+      - name: h15
+        description: >
+            Valor de la magnitud en la hora 15
+
+      - name: h16
+        description: >
+            Valor de la magnitud en la hora 16
+
+      - name: h17
+        description: >
+            Valor de la magnitud en la hora 17
+
+      - name: h18
+        description: >
+            Valor de la magnitud en la hora 18
+
+      - name: h19
+        description: >
+            Valor de la magnitud en la hora 19
+
+      - name: h20
+        description: >
+            Valor de la magnitud en la hora 20
+
+      - name: h21
+        description: >
+            Valor de la magnitud en la hora 21
+
+      - name: h22
+        description: >
+            Valor de la magnitud en la hora 22
+
+      - name: h23
+        description: >
+            Valor de la magnitud en la hora 23
+
+      - name: h24
+        description: >
+            Valor de la magnitud en la hora 24
+
+      - name: _airbyte_emitted_at
+        description: >
+                Fecha de la extracción del dato. Generado por Airbyte        
+
+
+  - name: base_ab_schema_weather_max
+    description: ""
+    columns:
+      - name: ano
+        description: >
+            Año de la toma del valor
+
+      - name: mes
+        description: >
+            Mes de la toma del valor
+
+      - name: dia
+        description: >
+            Día de la toma del valor
+
+      - name: estacion
+        description: >
+            Id de la estación que recoge los valores
+
+      - name: punto_muestreo
+        description: >
+            Punto de muestreo que recoge los valores. Contempla la provincia, la estación y la magnitud
+
+      - name: h01
+        description: >
+            Valor de la magnitud en la hora 1
+
+      - name: h02
+        description: >
+            Valor de la magnitud en la hora 2
+
+      - name: h03
+        description: >
+            Valor de la magnitud en la hora 3
+
+      - name: h04
+        description: >
+            Valor de la magnitud en la hora 4
+
+      - name: h05
+        description: >
+            Valor de la magnitud en la hora 5
+
+      - name: h06
+        description: >
+            Valor de la magnitud en la hora 6
+
+      - name: h07
+        description: >
+            Valor de la magnitud en la hora 7
+
+      - name: h08
+        description: >
+            Valor de la magnitud en la hora 8
+
+      - name: h09
+        description: >
+            Valor de la magnitud en la hora 9
+
+      - name: h10
+        description: >
+            Valor de la magnitud en la hora 10
+
+      - name: h11
+        description: >
+            Valor de la magnitud en la hora 11
+
+      - name: h12
+        description: >
+            Valor de la magnitud en la hora 12
+
+      - name: h13
+        description: >
+            Valor de la magnitud en la hora 13
+
+      - name: h14
+        description: >
+            Valor de la magnitud en la hora 14
+
+      - name: h15
+        description: >
+            Valor de la magnitud en la hora 15
+
+      - name: h16
+        description: >
+            Valor de la magnitud en la hora 16
+
+      - name: h17
+        description: >
+            Valor de la magnitud en la hora 17
+
+      - name: h18
+        description: >
+            Valor de la magnitud en la hora 18
+
+      - name: h19
+        description: >
+            Valor de la magnitud en la hora 19
+
+      - name: h20
+        description: >
+            Valor de la magnitud en la hora 20
+
+      - name: h21
+        description: >
+            Valor de la magnitud en la hora 21
+
+      - name: h22
+        description: >
+            Valor de la magnitud en la hora 22
+
+      - name: h23
+        description: >
+            Valor de la magnitud en la hora 23
+
+      - name: h24
+        description: >
+            Valor de la magnitud en la hora 24
+
+      - name: id_temp
+        description: >
+            Id del registro. Generado a partir de ano, mes, dia y punto de muestreo

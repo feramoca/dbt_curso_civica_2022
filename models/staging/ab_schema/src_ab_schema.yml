@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: ab_schema
-    description: "Datos extraidos desde ab_schema"
+    description: "Datos extraidos desde Airbyte"
     schema: ab_schema # this is the schema our raw data lives in
     database: |  
         {%- if  target.name == 'user_dev' -%} dev_bronze_db_alumno11 
@@ -18,129 +18,189 @@ sources:
 
 ##sources:
 ##  - name: ab_schema
-##    description: ""
+##    description: "Schema creado por las sincronizaciones de Airbyte"
 ##    database: dev_bronze_db_alumno11
     tables:
-      - name: tiempo3
-        description: ""
+      - name: weather
+        description: "Importa los datos de temperatura en tiempo real a través de Airbyte. Frecuencia de acutalización: 60 minutos"
         columns:
           - name: ano
-            description: ""
+            description: >
+                Año de la temperatura
           - name: dia
-            description: ""
+            description: >
+                Día de la temperatura
           - name: h01
-            description: ""
+            description: >
+                Valor de la temperatura en hora 1
           - name: h02
-            description: ""
+            description: >
+                Valor de la temperatura en hora 2
           - name: h03
-            description: ""
+            description: >
+                Valor de la temperatura en hora 3
           - name: h04
-            description: ""
+            description: >
+                Valor de la temperatura en hora 4
           - name: h05
-            description: ""
+            description: >
+                Valor de la temperatura en hora 5
           - name: h06
-            description: ""
+            description: >
+                Valor de la temperatura en hora 6
           - name: h07
-            description: ""
+            description: >
+                Valor de la temperatura en hora 7
           - name: h08
-            description: ""
+            description: >
+                Valor de la temperatura en hora 8
           - name: h09
-            description: ""
+            description: >
+                Valor de la temperatura en hora 9
           - name: h10
-            description: ""
+            description: >
+                Valor de la temperatura en hora 10
           - name: h11
-            description: ""
+            description: >
+                Valor de la temperatura en hora 11
           - name: h12
-            description: ""
+            description: >
+                Valor de la temperatura en hora 12
           - name: h13
-            description: ""
+            description: >
+                Valor de la temperatura en hora 13
           - name: h14
-            description: ""
+            description: >
+                Valor de la temperatura en hora 14
           - name: h15
-            description: ""
+            description: >
+                Valor de la temperatura en hora 15
           - name: h16
-            description: ""
+            description: >
+                Valor de la temperatura en hora 16
           - name: h17
-            description: ""
+            description: >
+                Valor de la temperatura en hora 17
           - name: h18
-            description: ""
+            description: >
+                Valor de la temperatura en hora 18
           - name: h19
-            description: ""
+            description: >
+                Valor de la temperatura en hora 19
           - name: h20
-            description: ""
+            description: >
+                Valor de la temperatura en hora 20
           - name: h21
-            description: ""
+            description: >
+                Valor de la temperatura en hora 21
           - name: h22
-            description: ""
+            description: >
+                Valor de la temperatura en hora 22
           - name: h23
-            description: ""
+            description: >
+                Valor de la temperatura en hora 23
           - name: h24
-            description: ""
+            description: >
+                Valor de la temperatura en hora 24
           - name: mes
-            description: ""
+            description: >
+                Mes de la temperatura
           - name: v01
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v02
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v03
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v04
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v05
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v06
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v07
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v08
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v09
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v10
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v11
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v12
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v13
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v14
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v15
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v16
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v17
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v18
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v19
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v20
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v21
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v22
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v23
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: v24
-            description: ""
+            description: >
+                indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
           - name: estacion
-            description: ""
+            description: >
+                Código de la estación de muestreo
           - name: magnitud
-            description: ""
+            description: >
+                Magnitud del valor reflejado en los campos hora. 80 RADIACIÓN ULTRAVIOLETA Mw/m2, 81 VELOCIDAD VIENTO m/s, 82 DIR. DE VIENTO, 83 TEMPERATURA ºC, 86 HUMEDAD RELATIVA %, 87 PRESION BARIOMETRICA mb, 88 RADIACION SOLAR W/m2, 89 PRECIPITACIÓN l/m2 
           - name: municipio
-            description: ""
+            description: >
+                Código del municipio.
           - name: provincia
-            description: ""
+            description: >
+                Códgio de la provincia
           - name: punto_muestreo
-            description: ""
+            description: >
+                Indica el código de la estación metereológica junto con la magnitud
           - name: _airbyte_ab_id
-            description: ""
+            description: >
+                Identificador generado por Airbyte
           - name: _airbyte_emitted_at
-            description: ""
+            description: >
+                Fecha de la extracción del dato. Generado por Airbyte
           - name: _airbyte_normalized_at
-            description: ""
-          - name: _airbyte_tiempo3_hashid
-            description: ""      
+            description: >
+                Fecha de la normalización del dato. Generado por Airbyte
+          - name: _airbyte_weather_hashid
+            description: >
+                Hash generado por Airbyte                

@@ -13,7 +13,7 @@ dim_products AS (
     SELECT
           product_id
         , name
-        , Stock
+        --, Stock
     FROM stg_products
     )
 
