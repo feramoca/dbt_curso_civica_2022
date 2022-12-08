@@ -1,9 +1,3 @@
-{{
-  config(
-    materialized='table'
-  )
-}}
-
 WITH stg_promos AS (
     SELECT * 
     FROM {{ ref('stg_sql_server_dbo_promos') }}

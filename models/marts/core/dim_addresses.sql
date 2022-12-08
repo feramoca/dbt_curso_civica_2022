@@ -1,9 +1,3 @@
-{{
-  config(
-    materialized='table'
-  )
-}}
-
 WITH stg_addresses AS (
     SELECT * 
     FROM {{ ref('stg_sql_server_dbo_addresses') }}
