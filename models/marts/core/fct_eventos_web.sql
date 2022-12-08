@@ -16,11 +16,6 @@ usuarios AS (
     FROM {{ ref('stg_sql_server_dbo_users') }}
     ),       
 
-dim_fecha as (
-    select *
-    from {{ ref('dim_fecha')}}
-),    
-
 Eventos_web AS (
     SELECT
           session_id
@@ -36,6 +31,7 @@ Eventos_web AS (
 
     FROM eventos
     join usuarios on usuarios.user_id = eventos.user_id
+ 
     group by session_id, eventos.user_id, usuarios.first_name, email 
     )
 

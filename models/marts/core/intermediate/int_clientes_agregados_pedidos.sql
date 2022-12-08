@@ -9,8 +9,8 @@ Clientes_agregados AS (
     SELECT
         user_id
         , count (pedidos.order_id) as Numero_Pedidos_Cliente
-        , sum (order_total) as Importe_Total_Cliente
-        , avg (order_total) as Importe_Medio_Pedido_Cliente
+        , Cast (sum (order_total) as numeric (8,2)) as Importe_Total_Cliente
+        , Cast (avg (order_total) as numeric (8,2)) as Importe_Medio_Pedido_Cliente
         , max (order_total) as Importe_Pedido_Max
         , min (order_total) as Importe_Pedido_Min
         , count (distinct address_id) as Direcciones_Distintas_Cliente

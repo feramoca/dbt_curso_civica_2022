@@ -21,7 +21,7 @@ Pedidos_agregados AS (
         , count (pedidos.order_id) as Numero_Articulos_Pedido
         , sum (quantity) as Total_Unidades_Pedido
         , pedidos.order_total
-        , ((order_total) / (sum (quantity))) as Importe_Medio_Articulo
+        , Cast (((order_total) / (sum (quantity))) as numeric (8,2)) as Importe_Medio_Articulo
         , DATEDIFF(day, created_at, delivered_at) AS Dias_en_Entregar
         , md5 (replace ( state, ' ', '')) as state_id 
         , shipping_cost

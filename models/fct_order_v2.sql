@@ -1,5 +1,3 @@
---tengo que revisar las fechas, que me quitan registros, son las marcadas con 4- ----
-
 WITH
 
 pedidos AS (

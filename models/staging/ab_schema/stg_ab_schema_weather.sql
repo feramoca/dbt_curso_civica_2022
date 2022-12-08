@@ -16,7 +16,7 @@ tem AS (
         , case 
             when id_fecha = 20221205 then '20210210'
             when id_fecha = 20221206 then '20210211'
-            else 'Sin_Fecha'
+            else id_fecha
             end as fecha_inventada        
     FROM tmp
     where value <> 0
