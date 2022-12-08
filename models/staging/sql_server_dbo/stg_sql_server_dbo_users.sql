@@ -1,9 +1,3 @@
-{{
-  config(
-    materialized='view'
-  )
-}}
-
 WITH src_users AS (
     SELECT * 
     FROM {{ source('sql_server_dbo', 'users') }}
