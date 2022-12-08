@@ -185,11 +185,6 @@ models:
         description: >
             Precio del producto
 
-      - name: stock
-        description: >
-            Campo creado en base al stock. Para indicar a compras y almacén si el stock del artílo es óptimo, bajo o alto.
-
-
   - name: stg_sql_server_dbo_promos
     description: >
         Listado de promos

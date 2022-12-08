@@ -18,6 +18,8 @@ tem AS (
             when id_fecha = 20221206 then '20210211'
             else id_fecha
             end as fecha_inventada        
+--- reemplazar la de abajo por la de arriba cuando sea domingo 11 diciembre 2022
+        , (id_fecha - 11000) as fecha_inventada_2
     FROM tmp
     where value <> 0
     )

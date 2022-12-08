@@ -18,10 +18,10 @@ with date as (
 
 select
       date_day as fecha
-    , day(date_day) as dia
     , year(date_day)*10000+month(date_day)*100+day(date_day) as id_date
     , year(date_day) as anio
     , month(date_day) as mes
+    , day(date_day) as dia
     , monthname(date_day) as desc_mes
     , year(date_day)*100+month(date_day) as id_anio_mes
     , date_day-1 as dia_previo

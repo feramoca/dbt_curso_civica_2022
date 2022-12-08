@@ -25,9 +25,9 @@ cli_agreg as (
     from {{ ref('int_clientes_agregados_pedidos')}}
 ),  
 
-dim_fecha_int as (
+dim_fecha as (
     select *
-    from {{ ref('int_fecha_pedido')}}
+    from {{ ref('dim_fecha')}}
 ),
 
 dim_addresses as (
@@ -55,15 +55,16 @@ src_ace AS (
 Pedidos_Cliente AS (
     SELECT
           pedidos.order_id
-        , pedidos.created_at
-        , dim_fecha_int.Fecha_Pedido_id as Fecha_Pedido_id
+        --, created_at as Fecha_Pedido
+        , created_at
+        , fechacreacion.id_date as Fecha_Pedido_id
         , promo_id
         , pedidos.user_id as Cliente
 --- Importes
         , pedidos.order_total as Pedido_Total_USD
         , pedidos.order_cost as Pedido_Coste_USD
         , pedidos.shipping_cost as Pedido_Envio_USD
-        , promos.discount Pedido_Descuento_USD        
+        , promos.discount Pedido_Descuento_EUR        
 --- Articulos 
         , ped_agreg.Numero_Articulos_Pedido
         , ped_agreg.Total_Unidades_Pedido
@@ -73,8 +74,10 @@ Pedidos_Cliente AS (
         , tracking_id as Pedido_tracking
         , pedidos.status_id as Pedido_Estado
         , shipping_service_id as Agencia_Envio
-        , dim_fecha_int.Fecha_entrega_id
-        , dim_fecha_int.Fecha_Prevista_Entrega_id
+        --, delivered_at as Fecha_entrega
+        , fechaentrega.id_date as Fecha_entrega_id
+        --, estimated_delivery_at as Fecha_Prevista_Entrega
+        , fechaprevista.id_date as Fecha_Prevista_Entrega_id
         , ped_agreg.Dias_en_Entregar
 --- Temp
         , stg_weather.temperatura_valor
@@ -90,11 +93,14 @@ Pedidos_Cliente AS (
     left join promos on promos.id_promo = pedidos.promo_id
     join ped_agreg on ped_agreg.order_id = pedidos.order_id
     join cli_agreg on cli_agreg.user_id = pedidos.user_id
+    join dim_fecha fechacreacion on fechacreacion.fecha = cast (pedidos.created_at as date)
+    left join dim_fecha fechaentrega on fechaentrega.fecha = cast (pedidos.delivered_at as date)
+    left join dim_fecha fechaprevista on fechaprevista.fecha = cast (pedidos.estimated_delivery_at as date)
     join dim_addresses on dim_addresses.address_id = pedidos.address_id
     join dim_state on dim_state.state_id = dim_addresses.state_id    
-    join dim_fecha_int on dim_fecha_int.order_id = pedidos.order_id
-    left join stg_weather on (stg_weather.estacion = dim_state.estacion) and (stg_weather.hora = hour (pedidos.created_at)) and (stg_weather.fecha_inventada = dim_fecha_int.Fecha_Pedido_id)   
+    left join stg_weather on (stg_weather.estacion = dim_state.estacion) and (stg_weather.hora = hour (pedidos.created_at)) and (stg_weather.fecha_inventada = fechacreacion.id_date)    
     join src_ace on src_ace.state_id = dim_state.state_id
+       
 
 --where fechacreacion.id_date = 20210211
 --where pedidos.order_id = '5b13b820-a450-42d2-aaaa-a8a9c5fbd48c'
