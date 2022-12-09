@@ -1,5 +1,5 @@
 WITH
-
+ 
 src_budget AS (
     SELECT * 
     FROM {{ ref('stg_google_sheets_budget') }}
