@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: fct_warehouse
+    description: >
+        Tabla de hechos que muestra el stock (en unidades y USD) que hay en el almacén.
+    columns:
+      - name: product_id
+        description: >
+            ID del producto
+
+      - name: inventory
+        description: >
+            Unidades en stock del producto
+
+      - name: price
+        description: >
+            Precio del producto
+
+      - name: total_warehouse
+        description: >
+            Importe total en USD de ese producto
+
+      - name: stock
+        description: >
+            Unidades en el almacén

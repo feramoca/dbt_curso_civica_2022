@@ -1,0 +1,81 @@
+version: 2
+
+models:
+  - name: fct_eventos_web
+    description: ""
+    columns:
+      - name: session_id
+        description: "Id de la sesión. Una sesión es una "visita" con muchos eventos
+"
+
+      - name: user_id
+        description: "Id del usuario que genera los eventos"
+
+      - name: first_name
+        description: "Nombre del cliente"
+
+      - name: email
+        description: "Correo electrónico del cliente"
+
+      - name: paginas_vistas
+        description: ""
+
+      - name: productos_vistos
+        description: ""
+
+      - name: fecha_primera_visita_web
+        description: ""
+
+      - name: fecha_ultima_visita_web
+        description: ""
+
+      - name: sesion_minutos
+        description: ""
+
+      - name: add_to_cart
+        description: ""
+
+      - name: page_view
+        description: ""
+
+      - name: checkout
+        description: ""
+
+      - name: package_shipped
+        description: ""
+
+  - name: fct_users
+    description: ""
+    columns:
+      - name: user_id
+        description: ""
+
+      - name: numero_pedidos_cliente
+        description: ""
+
+      - name: importe_total_cliente
+        description: ""
+
+      - name: importe_medio_pedido_cliente
+        description: ""
+
+      - name: importe_pedido_max
+        description: ""
+
+      - name: importe_pedido_min
+        description: ""
+
+      - name: direcciones_distintas_cliente
+        description: ""
+
+      - name: total_unidades_compradas_cliente
+        description: ""
+
+      - name: articulos_cliente
+        description: ""
+
+      - name: articulos_distintos_cliente
+        description: ""
+
+      - name: fecha_ultimo_pedido_id
+        description: ""        
