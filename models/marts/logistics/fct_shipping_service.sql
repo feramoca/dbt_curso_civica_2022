@@ -15,7 +15,7 @@ src_pedido_agregado AS (
 comp_shipping_service  AS (
     SELECT
           order_id 
-        , src_ace.state
+        , src_ace.state_id
         , cast (((fijo) + (variable * Total_Unidades_Pedido)) as numeric (8,2)) as Porte_ACE
         , shipping_cost as Porte_pagado 
         , case
