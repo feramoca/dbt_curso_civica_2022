@@ -1,0 +1,371 @@
+version: 2
+
+models:
+  - name: dim_addresses
+    description: "Dimensión de las direcciones de los users y de los orders"
+    columns:
+      - name: address_id
+        description: >
+            Id de la dirección, tanto del pedido como del cliente.
+
+      - name: country
+        description: >
+            País del pedido
+
+      - name: zipcode
+        description: >
+            Código postal
+
+      - name: address
+        description: >
+            Dirección
+
+      - name: state
+        description: >
+            Estado (el equivalente a Comunidad Autónoma)
+
+      - name: state_id
+        description: >
+            Id de State, generado a partir de MD5
+
+  - name: dim_fecha_mes
+    description: "Dimensión fecha grano mes. Generada a partir de dbt_utils.date_spine"
+    columns:
+      - name: fecha
+        description: ""
+
+      - name: anio
+        description: ""
+
+      - name: mes
+        description: ""
+
+      - name: desc_mes
+        description: ""
+
+      - name: id_anio_mes
+        description: ""
+
+      - name: mes_previo
+        description: ""
+
+  - name: dim_fecha
+    description: ""
+    columns:
+      - name: fecha
+        description: ""
+
+      - name: id_date
+        description: ""
+
+      - name: anio
+        description: ""
+
+      - name: mes
+        description: ""
+
+      - name: dia
+        description: ""
+
+      - name: desc_mes
+        description: ""
+
+      - name: id_anio_mes
+        description: ""
+
+      - name: dia_previo
+        description: ""
+
+      - name: anio_semana_dia
+        description: ""
+
+      - name: semana
+        description: ""
+
+  - name: dim_o_oi
+    description: ""
+    columns:
+      - name: order_item_id
+        description: ""
+
+      - name: order_id
+        description: "Id del pedido al que van asociados los artículos
+"
+
+      - name: product_id
+        description: "Id del producto que va en el pedido
+"
+
+  - name: dim_products
+    description: ""
+    columns:
+      - name: product_id
+        description: "ID del producto
+"
+
+      - name: name
+        description: "Nombre del producto
+"
+
+  - name: dim_promos
+    description: ""
+    columns:
+      - name: id_promo
+        description: "Id de la promo. Generado con un md5 (en origen es un varchar, antes le quito los espacios)
+"
+
+      - name: promo_nombre
+        description: "El antiguo promo_id
+"
+
+      - name: discount
+        description: "Importe del descuento. En € no en %
+"
+
+      - name: status
+        description: "Estado en el que se encuentra la promoción. Activa, inactiva
+"
+
+  - name: dim_shipping_service
+    description: ""
+    columns:
+      - name: shipping_service_id
+        description: "ID creada con md5 en base a shipping service para poder crear la dimensión.
+"
+
+      - name: shipping_service
+        description: "Agencia de transportes que lleva el pedido.
+"
+
+  - name: dim_state
+    description: ""
+    columns:
+      - name: state_id
+        description: "Id de State, generado con md5 a partir de state
+"
+
+      - name: state
+        description: "Estado de USA, los 50 estados y el distrito federal
+"
+
+      - name: postal_abbreviation
+        description: "Abreviación postal del Estado
+"
+
+      - name: estacion
+        description: "Estación metereológica del Estado"
+
+  - name: dim_status_order
+    description: ""
+    columns:
+      - name: status_id
+        description: "ID creada con md5 en base a status para poder crear la dimensión.
+"
+
+      - name: status
+        description: "Estado del pedido. En preparación, enviado, entregado,...
+"
+
+  - name: dim_users
+    description: ""
+    columns:
+      - name: user_id
+        description: "Id del usuario
+"
+
+      - name: phone_number
+        description: "Teléfono del cliente
+"
+
+      - name: first_name
+        description: "Nombre del cliente
+"
+
+      - name: last_name
+        description: "Apellidos del cliente
+"
+
+      - name: created_at
+        description: "Fecha de creación del cliente. Se hace un cast para convertir el varchar en fecha
+"
+
+      - name: address_id
+        description: "Id de la dirección del cliente. Referencia a Addresses.Address_id
+"
+
+      - name: updated_at
+        description: "Fecha de actualización del cliente. Se hace un cast para convertir el varchar en fecha
+"
+
+      - name: email
+        description: "Correo electrónico del cliente                                                
+"
+
+  - name: dim_status_order
+    description: ""
+    columns:
+      - name: status_id
+        description: "ID creada con md5 en base a status para poder crear la dimensión.
+"
+
+      - name: status
+        description: "Estado del pedido. En preparación, enviado, entregado,...
+"
+
+  - name: dim_users
+    description: ""
+    columns:
+      - name: user_id
+        description: "Id del usuario
+"
+
+      - name: phone_number
+        description: "Teléfono del cliente
+"
+
+      - name: first_name
+        description: "Nombre del cliente
+"
+
+      - name: last_name
+        description: "Apellidos del cliente
+"
+
+      - name: created_at
+        description: "Fecha de creación del cliente. Se hace un cast para convertir el varchar en fecha
+"
+
+      - name: address_id
+        description: "Id de la dirección del cliente. Referencia a Addresses.Address_id
+"
+
+      - name: updated_at
+        description: "Fecha de actualización del cliente. Se hace un cast para convertir el varchar en fecha
+"
+
+      - name: email
+        description: "Correo electrónico del cliente                                                
+"
+
+  - name: fct_budget
+    description: ""
+    columns:
+      - name: id_anio_mes
+        description: ""
+
+      - name: product_id
+        description: "Id del producto que va en el pedido
+"
+
+      - name: objetivo_cantidad
+        description: ""
+
+      - name: unidades_vendidas
+        description: ""
+
+      - name: consecucion_objetivo
+        description: ""
+
+  - name: fct_order_items
+    description: ""
+    columns:
+      - name: order_item_id
+        description: ""
+
+      - name: created_at
+        description: ""
+
+      - name: fecha_pedido_id
+        description: ""
+
+      - name: id_anio_mes
+        description: ""
+
+      - name: order_id
+        description: "Id del pedido al que van asociados los artículos
+"
+
+      - name: product_id
+        description: "ID del producto
+"
+
+      - name: quantity
+        description: "Cantidad de ese producto que va en el pedido
+"
+
+      - name: price
+        description: "Precio del producto
+"
+
+      - name: total_linea
+        description: ""
+
+  - name: fct_orders
+    description: ""
+    columns:
+      - name: order_id
+        description: "Id del pedido
+"
+
+      - name: created_at
+        description: "Fecha del pedido. Se hace un cast para convertir el texto en fecha
+"
+
+      - name: fecha_pedido_id
+        description: ""
+
+      - name: promo_id
+        description: "Id de la promo asociada al pedido. Como viene en varchar la convertimos en una clave primaria con un md5 (antes le quitamos los espacios al varchar) Relacionado con Promos.Promo_id # Ver si quito el md5 de la promo vacía
+"
+
+      - name: cliente
+        description: ""
+
+      - name: pedido_total_usd
+        description: ""
+
+      - name: pedido_coste_usd
+        description: ""
+
+      - name: pedido_envio_usd
+        description: ""
+
+      - name: pedido_descuento_usd
+        description: ""
+
+      - name: numero_articulos_pedido
+        description: ""
+
+      - name: total_unidades_pedido
+        description: ""
+
+      - name: importe_medio_articulo
+        description: ""
+
+      - name: direccion_envio
+        description: ""
+
+      - name: pedido_tracking
+        description: ""
+
+      - name: pedido_estado
+        description: ""
+
+      - name: agencia_envio
+        description: ""
+
+      - name: fecha_entrega_id
+        description: ""
+
+      - name: fecha_prevista_entrega_id
+        description: ""
+
+      - name: dias_en_entregar
+        description: ""
+
+      - name: temperatura_valor
+        description: "Valor en grados centígrados de la temperatura
+"
+
+      - name: nueva_fecha_entrega2
+        description: ""                
