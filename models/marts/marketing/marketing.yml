@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_eventos_web
-    description: "Modelo que analiza el comportamiento en las visitas a la web"
+    description: "Hechos. Analiza el comportamiento en las visitas a la web"
     columns:
       - name: session_id
         description: >
@@ -57,37 +57,48 @@ models:
             Nº de páginas que envian pedido
 
   - name: fct_users
-    description: ""
+    description: "Hechos. Analiza las compras del cliente"
     columns:
       - name: user_id
-        description: ""
+        description: >
+            Id del cliente que realiza el pedido
 
       - name: numero_pedidos_cliente
-        description: ""
+        description: >
+            Nº de pedidos que realiza el cliente
 
       - name: importe_total_cliente
-        description: ""
+        description: >
+            Importe total de compras del cliente. En USD
 
       - name: importe_medio_pedido_cliente
-        description: ""
+        description: >
+            Impoorte medio del pedido. En USD
 
       - name: importe_pedido_max
-        description: ""
+        description: >
+            Importe del pedido de mayor valor. En USD
 
       - name: importe_pedido_min
-        description: ""
+        description: >
+            Importe del pedido de menor valor. En USD
 
       - name: direcciones_distintas_cliente
-        description: ""
+        description: >
+            Nº de direcciones distintas a las que envía el cliente
 
       - name: total_unidades_compradas_cliente
-        description: ""
+        description: >
+            Total de unidades que ha comprado el cliente
 
       - name: articulos_cliente
-        description: ""
+        description: >
+            Nº de artículos que ha comprado el cliente
 
       - name: articulos_distintos_cliente
-        description: ""
+        description: >
+            Nº de artículos distintos que ha comprado el cliente
 
       - name: fecha_ultimo_pedido_id
-        description: ""        
+        description: >
+            Fecha de la última compra

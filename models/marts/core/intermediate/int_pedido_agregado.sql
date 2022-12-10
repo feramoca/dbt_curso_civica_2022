@@ -23,7 +23,7 @@ Pedidos_agregados AS (
         , pedidos.order_total
         , Cast (((order_total) / (sum (quantity))) as numeric (8,2)) as Importe_Medio_Articulo
         , DATEDIFF(day, created_at, delivered_at) AS Dias_en_Entregar
-        , md5 (replace ( state, ' ', '')) as state_id 
+        , md5 (replace ( state, ' ', '')) as state_id    
         , shipping_cost
     FROM pedidos
     join lineas on lineas.order_id = pedidos.order_id

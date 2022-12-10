@@ -220,7 +220,7 @@ models:
             Correo electrónico del cliente
 
   - name: fct_budget
-    description: "Objetivos de ventas"
+    description: "Hechos. Objetivos de ventas"
     columns:
       - name: id_anio_mes
         description: >
@@ -243,7 +243,7 @@ models:
             En % indica la consecución del objetivo
 
   - name: fct_order_items
-    description: "Ventas a nivel de producto"
+    description: "Hechos. Ventas a nivel de producto"
     columns:
       - name: order_item_id
         description: >
@@ -282,67 +282,88 @@ models:
             Importe de la venta del artículo (unidades x precio)
 
   - name: fct_orders
-    description: ""
+    description: "Hechos. Ventas a nivel de documento"
     columns:
       - name: order_id
-        description: "Id del pedido"
+        description: >
+            Id del pedido
 
       - name: created_at
-        description: "Fecha del pedido. Se hace un cast para convertir el texto en fecha"
+        description: >
+            Fecha del pedido. Se hace un cast para convertir el texto en fecha
 
       - name: fecha_pedido_id
-        description: ""
+        description: >
+            ID Fecha del pedido 
 
       - name: promo_id
-        description: "Id de la promo asociada al pedido. Como viene en varchar la convertimos en una clave primaria con un md5 (antes le quitamos los espacios al varchar) Relacionado con Promos.Promo_id # Ver si quito el md5 de la promo vacía"
+        description: >
+            Id de la promo asociada al pedido. Como viene en varchar la convertimos en una clave primaria con un md5 (antes le quitamos los espacios al varchar) Relacionado con Promos.Promo_id # Ver si quito el md5 de la promo vacía
 
       - name: cliente
-        description: ""
+        description: >
+            Id del cliente que realiza el pedido
 
       - name: pedido_total_usd
-        description: ""
+        description: >
+            Importe total del documento en USD (incluye artículos, portes y descuentos)
 
       - name: pedido_coste_usd
-        description: ""
+        description: >
+            Importe del documento en USD. SOLO ARTICULOS
 
       - name: pedido_envio_usd
-        description: ""
+        description: >
+            Importe de los portes en USD
 
       - name: pedido_descuento_usd
-        description: ""
+        description: >
+            Importe descontado en el pedido por promos aplicadas. En USD
 
       - name: numero_articulos_pedido
-        description: ""
+        description: >
+            Nº de productos distintos que hay en el pedido
 
       - name: total_unidades_pedido
-        description: ""
+        description: >
+            Nº de unidades que hay en el pedido
 
       - name: importe_medio_articulo
-        description: ""
+        description: >
+            Importe medio del producto en ese pedido. En USD
 
       - name: direccion_envio
-        description: ""
+        description: >
+            ID de la dirección de envío
 
       - name: pedido_tracking
-        description: ""
+        description: >
+            Id del tracking del pedido
 
       - name: pedido_estado
-        description: ""
+        description: >
+            Estado en el que se encuentra el pedido (preparación, enviado, entregado, ...)
 
       - name: agencia_envio
-        description: ""
+        description: >
+            Id de la agencia por la que se ha enviado el pedido
 
       - name: fecha_entrega_id
-        description: ""
+        description: >
+            Id de la fecha en la que se ha entregado el pedido
 
       - name: fecha_prevista_entrega_id
-        description: ""
+        description: >
+            Id de la fecha prevista de entrega
 
       - name: dias_en_entregar
-        description: ""
+        description: >
+            Días que ha tardado en entregarse el pedido (desde que se realiza el pedido hasta que se entrega)
 
       - name: temperatura_valor
-        description: "Valor en grados centígrados de la temperatura"
+        description: >
+            Valor en grados centígrados de la temperatura
 
       - name: nueva_fecha_entrega2
-        description: ""                
+        description: >
+            Nueva fecha de entrega, teniendo en cuenta la zona de entrega y la metereología recogida por las estaciones metereológicas y la hora de realización del pedido
