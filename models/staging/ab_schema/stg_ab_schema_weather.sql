@@ -6,8 +6,8 @@ tmp AS (
 
 tem AS (
     SELECT
-        --  *
-          concat (ano,mes,'0',dia) as id_fecha
+          id_temp
+        , concat (ano,mes,'0',dia) as id_fecha
         , cast ((replace ( field_name, 'H', '')) as integer) as hora
         , estacion
         , value as temperatura_valor
@@ -23,6 +23,7 @@ tem AS (
     )
 
 SELECT * FROM tem
+where id_temp != 'd05b2f9f14d369427f360b1b900ff96d'
 
 
 

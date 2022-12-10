@@ -295,6 +295,7 @@ models:
       - name: fecha_pedido_id
         description: >
             ID Fecha del pedido 
+          
 
       - name: promo_id
         description: >
