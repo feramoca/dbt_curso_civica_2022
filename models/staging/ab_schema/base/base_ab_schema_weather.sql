@@ -5,7 +5,7 @@
 
 WITH src_tiempo AS (
     SELECT * 
-    FROM {{ source('ab_schema', 'weather') }}
+    FROM {{ source('ab_schema_', 'weather') }}
     ),
 
 tiempo AS (
