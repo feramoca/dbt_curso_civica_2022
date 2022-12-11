@@ -23,7 +23,7 @@ tem AS (
     )
 
 SELECT * FROM tem
-where id_temp != 'd05b2f9f14d369427f360b1b900ff96d'
+--where id_temp != 'd05b2f9f14d369427f360b1b900ff96d'
 
 
 

@@ -1,4 +1,4 @@
-WITH 
+    WITH 
 
 src_a AS (
     SELECT * 
