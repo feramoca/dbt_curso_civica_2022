@@ -31,7 +31,7 @@ models:
         tests:
           - not_null                  
           - dbt_expectations.expect_column_values_to_be_between:
-              min_value: -20
+              min_value: -60
               max_value: 60          
 
       - name: fecha_inventada
