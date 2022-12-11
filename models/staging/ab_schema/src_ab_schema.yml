@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: ab_schema
+  - name: ab_schema_
     description: "Datos extraidos desde Airbyte"
-    schema: ab_schema # this is the schema our raw data lives in
+    schema: ab_schema_ # this is the schema our raw data lives in
     database: |  
         {%- if  target.name == 'user_dev' -%} dev_bronze_db_alumno11 
         {%- elif target.name == 'ci' -%} pro_bronze_db_alumno11 
@@ -27,84 +27,147 @@ sources:
           - name: ano
             description: >
                 Año de la temperatura
+            tests:
+              - not_null            
+              - dbt_expectations.expect_column_values_to_be_between:
+                  min_value: 2022
+                  max_value: 2023                   
           - name: dia
             description: >
                 Día de la temperatura
+            tests:
+              - not_null            
+              - dbt_expectations.expect_column_values_to_be_between:
+                  min_value: 1
+                  max_value: 31                    
           - name: h01
             description: >
                 Valor de la temperatura en hora 1
+            tests:
+              - not_null                  
           - name: h02
             description: >
                 Valor de la temperatura en hora 2
+            tests:
+              - not_null                  
           - name: h03
             description: >
                 Valor de la temperatura en hora 3
+            tests:
+              - not_null                  
           - name: h04
             description: >
                 Valor de la temperatura en hora 4
+            tests:
+              - not_null                  
           - name: h05
             description: >
                 Valor de la temperatura en hora 5
+            tests:
+              - not_null                  
           - name: h06
             description: >
                 Valor de la temperatura en hora 6
+            tests:
+              - not_null                  
           - name: h07
             description: >
                 Valor de la temperatura en hora 7
+            tests:
+              - not_null                  
           - name: h08
             description: >
                 Valor de la temperatura en hora 8
+            tests:
+              - not_null                  
           - name: h09
             description: >
                 Valor de la temperatura en hora 9
+            tests:
+              - not_null                  
           - name: h10
             description: >
                 Valor de la temperatura en hora 10
+            tests:
+              - not_null                  
           - name: h11
             description: >
                 Valor de la temperatura en hora 11
+            tests:
+              - not_null                  
           - name: h12
             description: >
                 Valor de la temperatura en hora 12
+            tests:
+              - not_null                  
           - name: h13
             description: >
                 Valor de la temperatura en hora 13
+            tests:
+              - not_null                  
           - name: h14
             description: >
                 Valor de la temperatura en hora 14
+            tests:
+              - not_null                  
           - name: h15
             description: >
                 Valor de la temperatura en hora 15
+            tests:
+              - not_null                  
           - name: h16
             description: >
                 Valor de la temperatura en hora 16
+            tests:
+              - not_null                  
           - name: h17
             description: >
                 Valor de la temperatura en hora 17
+            tests:
+              - not_null                  
           - name: h18
             description: >
                 Valor de la temperatura en hora 18
+            tests:
+              - not_null                  
           - name: h19
             description: >
                 Valor de la temperatura en hora 19
+            tests:
+              - not_null                  
           - name: h20
             description: >
                 Valor de la temperatura en hora 20
+            tests:
+              - not_null                  
           - name: h21
             description: >
                 Valor de la temperatura en hora 21
+            tests:
+              - not_null                  
           - name: h22
             description: >
                 Valor de la temperatura en hora 22
+            tests:
+              - not_null                  
           - name: h23
             description: >
                 Valor de la temperatura en hora 23
+            tests:
+              - not_null                  
           - name: h24
             description: >
                 Valor de la temperatura en hora 24
+            tests:
+              - not_null                  
           - name: mes
             description: >
                 Mes de la temperatura
+            tests:
+              - not_null            
+              - dbt_expectations.expect_column_values_to_be_between:
+                  min_value: 1
+                  max_value: 12                    
           - name: v01
             description: >
                 indica si el valor es válido o no para esa hora v01->h01 ...  . V:Si N:No
@@ -180,27 +243,52 @@ sources:
           - name: estacion
             description: >
                 Código de la estación de muestreo
+            tests:
+              - not_null                  
           - name: magnitud
             description: >
                 Magnitud del valor reflejado en los campos hora. 80 RADIACIÓN ULTRAVIOLETA Mw/m2, 81 VELOCIDAD VIENTO m/s, 82 DIR. DE VIENTO, 83 TEMPERATURA ºC, 86 HUMEDAD RELATIVA %, 87 PRESION BARIOMETRICA mb, 88 RADIACION SOLAR W/m2, 89 PRECIPITACIÓN l/m2 
+            tests:
+              - not_null      
+              - dbt_expectations.expect_column_values_to_be_between:
+                  min_value: 80
+                  max_value: 90                          
           - name: municipio
             description: >
                 Código del municipio.
+            tests:
+              - not_null         
+              - dbt_expectations.expect_column_values_to_be_in_set:
+                  value_set: ['79']                                               
           - name: provincia
             description: >
                 Códgio de la provincia
+            tests:
+              - not_null
+              - dbt_expectations.expect_column_values_to_be_in_set:
+                  value_set: ['28']                                
           - name: punto_muestreo
             description: >
                 Indica el código de la estación metereológica junto con la magnitud
+            tests:
+              - not_null                  
           - name: _airbyte_ab_id
             description: >
                 Identificador generado por Airbyte
+            tests:
+              - not_null                  
           - name: _airbyte_emitted_at
             description: >
                 Fecha de la extracción del dato. Generado por Airbyte
+            tests:
+              - not_null                  
           - name: _airbyte_normalized_at
             description: >
                 Fecha de la normalización del dato. Generado por Airbyte
+            tests:
+              - not_null                  
           - name: _airbyte_weather_hashid
             description: >
                 Hash generado por Airbyte                
+            tests:
+              - not_null                  

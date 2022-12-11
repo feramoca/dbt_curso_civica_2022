@@ -1,0 +1,104 @@
+version: 2
+
+models:
+  - name: fct_eventos_web
+    description: "Hechos. Analiza el comportamiento en las visitas a la web"
+    columns:
+      - name: session_id
+        description: >
+            Id de la sesión. Una sesión es una "visita" con muchos eventos
+
+      - name: user_id
+        description: >
+            Id del usuario que genera los eventos
+
+      - name: first_name
+        description: >
+            Nombre del cliente
+
+      - name: email
+        description: >
+            Correo electrónico del cliente
+
+      - name: paginas_vistas
+        description: >
+            Nº de páginas que ha visto en esa sesión
+
+      - name: productos_vistos
+        description: >
+            Nº de productos que ha visto en esa sesión
+
+      - name: fecha_primera_visita_web
+        description: >
+            Fecha de la primera visita de esa sesión
+
+      - name: fecha_ultima_visita_web
+        description: >
+            Fecha de la última visita de esa sesión
+
+      - name: sesion_minutos
+        description: >
+            Minutos que dura la sesión
+
+      - name: add_to_cart
+        description: >
+            Nº de páginas que añaden al carro
+
+      - name: page_view
+        description: >
+            Nº de páginas que han visto productos
+
+      - name: checkout
+        description: >
+            Nº de páginas que confirman pedido
+
+      - name: package_shipped
+        description: >
+            Nº de páginas que envian pedido
+
+  - name: fct_users
+    description: "Hechos. Analiza las compras del cliente"
+    columns:
+      - name: user_id
+        description: >
+            Id del cliente que realiza el pedido
+
+      - name: numero_pedidos_cliente
+        description: >
+            Nº de pedidos que realiza el cliente
+
+      - name: importe_total_cliente
+        description: >
+            Importe total de compras del cliente. En USD
+
+      - name: importe_medio_pedido_cliente
+        description: >
+            Impoorte medio del pedido. En USD
+
+      - name: importe_pedido_max
+        description: >
+            Importe del pedido de mayor valor. En USD
+
+      - name: importe_pedido_min
+        description: >
+            Importe del pedido de menor valor. En USD
+
+      - name: direcciones_distintas_cliente
+        description: >
+            Nº de direcciones distintas a las que envía el cliente
+
+      - name: total_unidades_compradas_cliente
+        description: >
+            Total de unidades que ha comprado el cliente
+
+      - name: articulos_cliente
+        description: >
+            Nº de artículos que ha comprado el cliente
+
+      - name: articulos_distintos_cliente
+        description: >
+            Nº de artículos distintos que ha comprado el cliente
+
+      - name: fecha_ultimo_pedido_id
+        description: >
+            Fecha de la última compra

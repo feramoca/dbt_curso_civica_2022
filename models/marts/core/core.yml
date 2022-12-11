@@ -1,0 +1,370 @@
+version: 2
+
+models:
+  - name: dim_addresses
+    description: "Dimensión de las direcciones de los users y de los orders"
+    columns:
+      - name: address_id
+        description: >
+            Id de la dirección, tanto del pedido como del cliente.
+
+      - name: country
+        description: >
+            País del pedido
+
+      - name: zipcode
+        description: >
+            Código postal
+
+      - name: address
+        description: >
+            Dirección
+
+      - name: state
+        description: >
+            Estado (el equivalente a Comunidad Autónoma)
+
+      - name: state_id
+        description: >
+            Id de State, generado a partir de MD5
+
+  - name: dim_fecha_mes
+    description: "Dimensión fecha grano mes. Generada a partir de dbt_utils.date_spine"
+    columns:
+      - name: fecha
+        description: >
+            Fecha que genera date_spine. Año-mes
+
+      - name: anio
+        description: >
+            Sacamos el año de fecha
+
+      - name: mes
+        description: >
+            Sacamos el mes de fecha
+
+      - name: desc_mes
+        description: >
+            Sacamos el mes en nombre de fecha
+
+      - name: id_anio_mes
+        description: >
+            Sacamos el identificador añomes de la fecha
+
+      - name: mes_previo
+        description: >
+            Sacamos el mes previo de fecha
+
+  - name: dim_fecha
+    description: "Dimensión fecha grano día. Generada a partir de dbt_utils.date_spine"
+    columns:
+      - name: fecha
+        description: >
+            Fecha que genera date_spine. Año-mes
+
+      - name: id_date
+        description: >
+            Sacamos el identificador añomesdia de la fecha
+
+      - name: anio
+        description: >
+            Sacamos el año de fecha
+
+      - name: mes
+        description: >
+            Sacamos el mes de fecha
+
+      - name: dia
+        description: >
+            Sacamos el día de fecha
+
+      - name: desc_mes
+        description: >
+            Sacamos el mes en nombre de fecha
+
+      - name: id_anio_mes
+        description: >
+            Sacamos el identificador añomes de la fecha (para dim_fecha_mes)
+
+      - name: dia_previo
+        description: >
+            Sacamos el día previo de fecha
+
+      - name: anio_semana_dia
+        description: >
+            Sacamos el añosemanadia de fecha
+
+      - name: semana
+        description: >
+            Sacamos la semana de fecha
+
+  - name: dim_o_oi
+    description: "Dimensión de order_items"
+    columns:
+      - name: order_item_id
+        description: >
+            Id generada con subrrogate_key a partir de order_id y product_id
+
+      - name: order_id
+        description: >
+            Id del pedido al que van asociados los artículos
+
+      - name: product_id
+        description: 
+            Id del producto que va en el pedido
+
+  - name: dim_products
+    description: "Dimensión de Products"
+    columns:
+      - name: product_id
+        description: >
+            ID del producto
+
+      - name: name
+        description: >
+            Nombre del producto
+
+  - name: dim_promos
+    description: ""
+    columns:
+      - name: id_promo
+        description: >
+            Id de la promo. Generado con un md5 (en origen es un varchar, antes le quito los espacios)
+
+      - name: promo_nombre
+        description: >
+            El antiguo promo_id
+
+      - name: discount
+        description: >
+            Importe del descuento. En USD no en %
+
+      - name: status
+        description: >
+            Estado en el que se encuentra la promoción. Activa, inactiva
+
+  - name: dim_shipping_service
+    description: "Dimensión de Agencias de Envío"
+    columns:
+      - name: shipping_service_id
+        description: >
+            ID creada con md5 en base a shipping service para poder crear la dimensión.
+
+      - name: shipping_service
+        description: >
+            Agencia de transportes que lleva el pedido.
+
+  - name: dim_state
+    description: "Dimensión de los Estados de USA"
+    columns:
+      - name: state_id
+        description: >
+            Id de State, generado con md5 a partir de state
+
+      - name: state
+        description: >
+            Estado de USA, los 50 estados y el distrito federal
+
+      - name: postal_abbreviation
+        description: >
+            Abreviación postal del Estado
+
+      - name: estacion
+        description: >
+            Estación metereológica del Estado
+
+  - name: dim_status_order
+    description: "Dimensión del estado en el que se encuentra el pedido"
+    columns:
+      - name: status_id
+        description: >
+            ID creada con md5 en base a status para poder crear la dimensión.
+
+      - name: status
+        description: >
+            Estado del pedido. En preparación, enviado, entregado,...
+
+  - name: dim_users
+    description: "Dimensión de los usuarios de la web"
+    columns:
+      - name: user_id
+        description: >
+            Id del usuario
+
+      - name: phone_number
+        description: >
+            Teléfono del cliente
+
+      - name: first_name
+        description: >
+            Nombre del cliente
+
+      - name: last_name
+        description: >
+            Apellidos del cliente
+
+      - name: created_at
+        description: >
+            Fecha de creación del cliente
+
+      - name: address_id
+        description: >
+            Id de la dirección del cliente. Referencia a Addresses.Address_id
+
+      - name: updated_at
+        description: >
+            Fecha de actualización del cliente
+
+      - name: email
+        description: >
+            Correo electrónico del cliente
+
+  - name: fct_budget
+    description: "Hechos. Objetivos de ventas"
+    columns:
+      - name: id_anio_mes
+        description: >
+            Id fecha, añomes
+
+      - name: product_id
+        description: >
+            Id del producto que va en el pedido
+
+      - name: objetivo_cantidad
+        description: >
+            Objetivo en unidades de venta del producto
+
+      - name: unidades_vendidas
+        description: >
+            Unidades vendidas del producto
+
+      - name: consecucion_objetivo
+        description: >
+            En % indica la consecución del objetivo
+
+  - name: fct_order_items
+    description: "Hechos. Ventas a nivel de producto"
+    columns:
+      - name: order_item_id
+        description: >
+            id creada a partir de order_id y product_id
+
+      - name: created_at
+        description: >
+            Fecha del pedido
+
+      - name: fecha_pedido_id
+        description: >
+            Fecha del pedido en id
+
+      - name: id_anio_mes
+        description: >
+            Fecha en añomes
+
+      - name: order_id
+        description: >
+            Id del pedido al que van asociados los artículos
+
+      - name: product_id
+        description: >
+            ID del producto
+
+      - name: quantity
+        description: >
+            Cantidad de ese producto que va en el pedido
+
+      - name: price
+        description: >
+            Precio del producto
+
+      - name: total_linea
+        description: >
+            Importe de la venta del artículo (unidades x precio)
+
+  - name: fct_orders
+    description: "Hechos. Ventas a nivel de documento"
+    columns:
+      - name: order_id
+        description: >
+            Id del pedido
+
+      - name: created_at
+        description: >
+            Fecha del pedido. Se hace un cast para convertir el texto en fecha
+
+      - name: fecha_pedido_id
+        description: >
+            ID Fecha del pedido 
+          
+
+      - name: promo_id
+        description: >
+            Id de la promo asociada al pedido. Como viene en varchar la convertimos en una clave primaria con un md5 (antes le quitamos los espacios al varchar) Relacionado con Promos.Promo_id # Ver si quito el md5 de la promo vacía
+
+      - name: cliente
+        description: >
+            Id del cliente que realiza el pedido
+
+      - name: pedido_total_usd
+        description: >
+            Importe total del documento en USD (incluye artículos, portes y descuentos)
+
+      - name: pedido_coste_usd
+        description: >
+            Importe del documento en USD. SOLO ARTICULOS
+
+      - name: pedido_envio_usd
+        description: >
+            Importe de los portes en USD
+
+      - name: pedido_descuento_usd
+        description: >
+            Importe descontado en el pedido por promos aplicadas. En USD
+
+      - name: numero_articulos_pedido
+        description: >
+            Nº de productos distintos que hay en el pedido
+
+      - name: total_unidades_pedido
+        description: >
+            Nº de unidades que hay en el pedido
+
+      - name: importe_medio_articulo
+        description: >
+            Importe medio del producto en ese pedido. En USD
+
+      - name: direccion_envio
+        description: >
+            ID de la dirección de envío
+
+      - name: pedido_tracking
+        description: >
+            Id del tracking del pedido
+
+      - name: pedido_estado
+        description: >
+            Estado en el que se encuentra el pedido (preparación, enviado, entregado, ...)
+
+      - name: agencia_envio
+        description: >
+            Id de la agencia por la que se ha enviado el pedido
+
+      - name: fecha_entrega_id
+        description: >
+            Id de la fecha en la que se ha entregado el pedido
+
+      - name: fecha_prevista_entrega_id
+        description: >
+            Id de la fecha prevista de entrega
+
+      - name: dias_en_entregar
+        description: >
+            Días que ha tardado en entregarse el pedido (desde que se realiza el pedido hasta que se entrega)
+
+      - name: temperatura_valor
+        description: >
+            Valor en grados centígrados de la temperatura
+
+      - name: nueva_fecha_entrega2
+        description: >
+            Nueva fecha de entrega, teniendo en cuenta la zona de entrega y la metereología recogida por las estaciones metereológicas y la hora de realización del pedido

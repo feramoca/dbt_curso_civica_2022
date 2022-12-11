@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_google_sheets_budget
+    description: >
+            Tabla de objetivos mensuales a nivel de producto
+    columns:
+      - name: _row
+        description: >
+                Id del registro
+
+      - name: product_id
+        description: >
+                Id del producto
+
+      - name: quantity
+        description: >
+                Cantidad en unidades que se espera vender.
+
+      - name: month
+        description: >
+                Mes/Año del objetivo

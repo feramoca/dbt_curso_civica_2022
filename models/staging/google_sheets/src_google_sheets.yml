@@ -28,6 +28,8 @@ sources:
           - name: quantity
             description: >
                 Cantidad del producto
+            test:
+              - positive_values
           - name: month
             description: >
                 Mes del snapshoot

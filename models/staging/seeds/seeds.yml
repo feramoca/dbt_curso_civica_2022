@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: stg_seeds_ace
+    description: >
+        Tabla de la tarifa de envío de la agencia que hace la propuesta para ver si se trabaja con ellos.
+    columns:
+      - name: state_id
+        description: >
+            Id de State, generado con md5 a partir de state
+        tests:
+          - not_null            
+
+      - name: state
+        description: >
+            Estado de USA, los 50 estados y el distrito federal
+        tests:
+          - not_null              
+
+      - name: fijo
+        description: >
+            Importe en USD fijo por envío, depende de la zona.
+        tests:
+          - not_null    
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 2
+              max_value: 5
+
+      - name: variable
+        description: >
+            importe en USD variable según el número de artículos que lleva el pedido.
+        tests:
+          - not_null 
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0.2
+              max_value: 2                                       
+
+      - name: zona
+        description: >
+            Zona a la que pertenece el estado. Son 3 zonas. 1 - Estado donde se realiza el pedido, 2 - Estados limítrofes, 3 - resto de Estados
+        tests:
+          - not_null        
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              max_value: 4
+
+  - name: stg_seeds_states
+    description: ""
+    columns:
+      - name: state_id
+        description: >
+            Id de State, generado con md5 a partir de state
+        tests:
+          - not_null              
+
+      - name: state
+        description: >
+            Estado de USA, los 50 estados y el distrito federal
+        tests:
+          - not_null              
+
+      - name: postal_abbreviation
+        description: >
+            Abreviación postal del Estado
+        tests:
+          - not_null              
+
+      - name: estacion
+        description: >
+            Estación metereológica del Estado
+        tests:
+          - not_null              

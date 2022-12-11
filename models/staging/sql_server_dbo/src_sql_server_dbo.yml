@@ -123,7 +123,7 @@ sources:
                 Cantidad de ese producto que va en el pedido
             tests:
               - not_null
-              #- positive_values			             
+              - positive_values			             
           - name: _fivetran_deleted
             description: ""
           - name: _fivetran_synced

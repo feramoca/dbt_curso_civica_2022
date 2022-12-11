@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: fct_shipping_service
+    description: "modelo que calcula los portes con la nueva agencia de transportes y ve si es favorable o no enviar"
+    columns:
+      - name: order_id
+        description: >
+            Id del pedido
+
+      - name: state
+        description: >
+            Estado de USA, los 50 estados y el distrito federal
+
+      - name: porte_ace
+        description: >
+            Coste del porte en USD con la nueva agencia de transportes
+
+      - name: porte_pagado
+        description: >
+            Coste del porte en USD con las actuales agencias de trasporte
+
+      - name: favorable_ace
+        description: >
+            Indica si el porte con la nueva agencia de transporte es más barato que con las agencias contratadas
+
+      - name: ahorro_porte_usd
+        description: >
+            Ahorro en USD si se hubiera hecho con la nueva agencia de transporte
+
+      - name: total_unidades_pedido
+        description: >
+            Nº de unidades que tiene el pedido
+
+      - name: fijo
+        description: >
+            Importe en USD fijo por envío, depende de la zona.
+
+      - name: variable
+        description: >
+            Importe en USD variable según el número de artículos que lleva el pedido.

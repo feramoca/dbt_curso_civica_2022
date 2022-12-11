@@ -7,18 +7,32 @@ models:
       - name: id_fecha
         description: >
             Id_fecha con al misma estructura de la dim_fecha. Generado a partir de Año,mes y día
+        tests:
+          - not_null      
 
       - name: hora
         description: >
             Hora del registro temperatura. Se le quita la H para poder comparar horas
+        tests:
+          - not_null            
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              max_value: 24            
 
       - name: estacion
         description: >
             Id de la estación que recoge el valor
+        tests:
+          - not_null                   
 
       - name: temperatura_valor
         description: >
             Valor en grados centígrados de la temperatura
+        tests:
+          - not_null                  
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -60
+              max_value: 60          
 
       - name: fecha_inventada
         description: >

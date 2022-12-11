@@ -1,0 +1,153 @@
+version: 2
+
+models:
+  - name: int_clientes_agregados_articulos
+    description: "Intermedia para clientes a nivel de artículo"
+    columns:
+      - name: user_id
+        description: >
+            ID del cliente. Relacionado con USERS.User_id
+
+      - name: total_unidades_compradas_cliente
+        description: >
+            Nº total de unidades que ha comprado el cliente
+
+      - name: articulos_cliente
+        description: >
+            Nº total de artículos que ha comprado el cliente
+
+      - name: articulos_distintos_cliente
+        description: >
+            Nª de artículos distintos que ha comprado el cliente
+
+  - name: int_clientes_agregados_pedidos
+    description: "Intermedia para clientes a nivel de documento"
+    columns:
+      - name: user_id
+        description: >
+            ID del cliente. Relacionado con USERS.User_id
+
+      - name: numero_pedidos_cliente
+        description: >
+            Nº de pedidos que ha realizado el cliente
+
+      - name: importe_total_cliente
+        description: >
+            Importe total comprado por el cliente. En USD
+
+      - name: importe_medio_pedido_cliente
+        description: >
+            Importe medio del pedido. En USD
+
+      - name: importe_pedido_max
+        description: >
+            Importe del pedido de mayor importe. En USD
+
+      - name: importe_pedido_min
+        description: >
+            Importe del pedido de menor importe. En USD
+
+      - name: direcciones_distintas_cliente
+        description: >
+            Nº de direcciones distintas a las que se le ha enviado al cliente
+
+      - name: fecha_ultimo_pedido
+        description: >
+            Fecha en la que realizó el último pedido
+
+  - name: int_fecha_pedido
+    description: "Intermedia de fechas. Tiene varios join y se van a usar en varias tablas de hechos"
+    columns:
+      - name: order_id
+        description: >
+            Id del pedido
+
+      - name: created_at
+        description: >
+            Fecha del pedido.
+
+      - name: fecha_pedido_id
+        description: >
+            Id de fecha del pedido
+
+      - name: fecha_entrega_id
+        description: >
+            Id de fecha de entrega del pedido
+
+      - name: fecha_prevista_entrega_id
+        description: >
+            Id de fecha prevista de entrega
+
+      - name: id_anio_mes
+        description: >
+            Sacamos el identificador añomes de la fecha del pedido
+
+  - name: int_pedido_agregado
+    description: "Intermedia para pedidos"
+    columns:
+      - name: order_id
+        description: >
+            Id del pedido al que van asociados los artículos
+
+      - name: numero_articulos_pedido
+        description: >
+            Nº de productos distintos que hay en el pedido
+
+      - name: total_unidades_pedido
+        description: >
+            Total de unidades que hay en el pedido
+
+      - name: order_total
+        description: >
+            Precio total del pedido (incluidos gastos de envío y descuentos). Es lo que paga el cliente.
+
+      - name: importe_medio_articulo
+        description: >
+            Importe medio del producto
+
+      - name: dias_en_entregar
+        description: >
+            Días que tarda en entregarse el pedido. Desde que se hace el pedido hasta que se entrega
+
+      - name: state_id
+        description: >
+            Id del State
+
+      - name: shipping_cost
+        description: >
+            Coste del envío del pedido
+
+  - name: int_session_events_users
+    description: "Intermedia de los eventos de la web"
+    columns:
+      - name: session_id
+        description: >
+            Id de la sesión. Una sesión es una "visita" con muchos eventos
+
+      - name: created_at
+        description: >
+            Fecha del evento. Se hace un cast para convertir el texto en fecha
+
+      - name: user_id
+        description: 
+            Id del usuario que genera los eventos
+
+      - name: product_id
+        description: >
+            Id del producto, no aparece si se hace un checkout.
+
+      - name: add_to_cart
+        description: >
+            Nº de páginas que añaden al carro
+
+      - name: page_view
+        description: >
+            Nº de páginas que han visto productos
+
+      - name: checkout
+        description: >
+            Nº de páginas que confirman pedido
+
+      - name: package_shipped
+        description: >
+            Nº de páginas que envian pedido

@@ -7,134 +7,206 @@ models:
       - name: ano
         description: >
             Año de la toma del valor
+        tests:
+          - not_null            
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 2022
+              max_value: 2023               
 
       - name: mes
         description: >
             Mes de la toma del valor
-
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              max_value: 12
+              
       - name: dia
         description: >
             Día de la toma del valor
+        tests:
+          - not_null       
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              max_value: 31               
 
       - name: provincia
         description: >
             Provincia de la toma del valor
+        tests:
+          - not_null
 
       - name: estacion
         description: >
             Id de la estación que recoge los valores
+        tests:
+          - not_null            
 
       - name: punto_muestreo
         description: >
             Punto de muestreo que recoge los valores. Contempla la provincia, la estación y la magnitud
+        tests:
+          - not_null            
 
       - name: magnitud
         description: >
             Magnitud del valor reflejado en los campos hora. 80 RADIACIÓN ULTRAVIOLETA Mw/m2, 81 VELOCIDAD VIENTO m/s, 82 DIR. DE VIENTO, 83 TEMPERATURA ºC, 86 HUMEDAD RELATIVA %, 87 PRESION BARIOMETRICA mb, 88 RADIACION SOLAR W/m2, 89 PRECIPITACIÓN l/m2 
+        tests:
+          - not_null            
 
       - name: h01
         description: >
             Valor de la magnitud en la hora 1
+        tests:
+          - not_null            
 
       - name: h02
         description: >
             Valor de la magnitud en la hora 2
+        tests:
+          - not_null            
 
       - name: h03
         description: >
             Valor de la magnitud en la hora 3
+        tests:
+          - not_null            
 
       - name: h04
         description: >
             Valor de la magnitud en la hora 4
+        tests:
+          - not_null            
 
       - name: h05
         description: >
             Valor de la magnitud en la hora 5
+        tests:
+          - not_null            
 
       - name: h06
         description: >
             Valor de la magnitud en la hora 6
+        tests:
+          - not_null            
 
       - name: h07
         description: >
             Valor de la magnitud en la hora 7
+        tests:
+          - not_null            
 
       - name: h08
         description: >
             Valor de la magnitud en la hora 8
+        tests:
+          - not_null            
 
       - name: h09
         description: >
             Valor de la magnitud en la hora 9
+        tests:
+          - not_null            
 
       - name: h10
         description: >
             Valor de la magnitud en la hora 10
+        tests:
+          - not_null            
 
       - name: h11
         description: >
             Valor de la magnitud en la hora 11
+        tests:
+          - not_null            
 
       - name: h12
         description: >
             Valor de la magnitud en la hora 12
+        tests:
+          - not_null            
 
       - name: h13
         description: >
             Valor de la magnitud en la hora 13
+        tests:
+          - not_null            
 
       - name: h14
         description: >
             Valor de la magnitud en la hora 14
+        tests:
+          - not_null            
 
       - name: h15
         description: >
             Valor de la magnitud en la hora 15
+        tests:
+          - not_null            
 
       - name: h16
         description: >
             Valor de la magnitud en la hora 16
+        tests:
+          - not_null            
 
       - name: h17
         description: >
             Valor de la magnitud en la hora 17
+        tests:
+          - not_null            
 
       - name: h18
         description: >
             Valor de la magnitud en la hora 18
+        tests:
+          - not_null            
 
       - name: h19
         description: >
             Valor de la magnitud en la hora 19
+        tests:
+          - not_null            
 
       - name: h20
         description: >
             Valor de la magnitud en la hora 20
+        tests:
+          - not_null            
 
       - name: h21
         description: >
             Valor de la magnitud en la hora 21
+        tests:
+          - not_null            
 
       - name: h22
         description: >
             Valor de la magnitud en la hora 22
+        tests:
+          - not_null            
 
       - name: h23
         description: >
             Valor de la magnitud en la hora 23
+        tests:
+          - not_null            
 
       - name: h24
         description: >
             Valor de la magnitud en la hora 24
+        tests:
+          - not_null            
 
       - name: _airbyte_emitted_at
         description: >
-                Fecha de la extracción del dato. Generado por Airbyte        
-
+                Fecha de la extracción del dato. Generado por Airbyte     
+        tests:
+          - not_null                                 
 
   - name: base_ab_schema_weather_max
-    description: ""
+    description: "Recoge los datos de weather y se queda con la fecha más reciente de cada día para no tener datos duplicados"
     columns:
       - name: ano
         description: >
@@ -255,3 +327,6 @@ models:
       - name: id_temp
         description: >
             Id del registro. Generado a partir de ano, mes, dia y punto de muestreo
+        tests:
+          - unique
+          - not_null
